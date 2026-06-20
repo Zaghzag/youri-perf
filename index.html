@@ -8,19 +8,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap');
 
 :root {
-  --bg: #0C0C0E;
-  --surface: #141417;
-  --card: #1A1A1F;
-  --border: #242428;
-  --accent: #C8F135;
-  --blue: #60A5FA;
-  --orange: #FB923C;
-  --red: #F87171;
-  --yellow: #FACC15;
-  --green: #4ADE80;
-  --text: #F0F0F5;
-  --muted: #6B6B7A;
-  --white: #FFFFFF;
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+  --border: #ECE6DC;
+  --accent: #FF6B4A;
+  --accent2: #00C896;
+  --blue: #4A8FE7;
+  --orange: #FF6B4A;
+  --red: #EF4060;
+  --yellow: #FFB627;
+  --green: #00C896;
+  --text: #2A2438;
+  --muted: #9893A8;
+  --white: #2A2438;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -60,11 +61,11 @@ body {
 .page-title span { color: var(--accent); }
 .page-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(42,36,56,0.05); }
 .card-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
 
 /* TODAY SUMMARY BAR */
-.today-bar { background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(200,241,53,0.02)); border: 1px solid rgba(200,241,53,0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.today-bar { background: linear-gradient(135deg, rgba(255,107,74,0.08), rgba(255,107,74,0.02)); border: 1px solid rgba(255,107,74,0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
 .today-bar-icon { font-size: 22px; }
 .today-bar-text { flex: 1; }
 .today-bar-title { font-weight: 700; font-size: 13px; color: var(--white); }
@@ -73,14 +74,14 @@ body {
 /* WEEK DAYS */
 .week-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 16px; }
 .day-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 4px; text-align: center; cursor: pointer; }
-.day-pill.active { border-color: var(--accent); background: rgba(200,241,53,0.07); }
+.day-pill.active { border-color: var(--accent); background: rgba(255,107,74,0.07); }
 .day-pill.is-today { box-shadow: 0 0 0 1px var(--accent) inset; }
 .day-pill .d-name { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
 .day-pill .d-icon { font-size: 16px; margin-bottom: 4px; }
 .day-pill .d-tag { font-size: 8px; font-weight: 700; text-transform: uppercase; padding: 2px 4px; border-radius: 3px; }
-.tag-muscu { background: rgba(200,241,53,0.15); color: var(--accent); }
+.tag-muscu { background: rgba(255,107,74,0.15); color: var(--accent); }
 .tag-run { background: rgba(96,165,250,0.15); color: var(--blue); }
-.tag-yoga { background: rgba(168,85,247,0.15); color: #C084FC; }
+.tag-yoga { background: rgba(0,200,150,0.15); color: var(--accent2); }
 .tag-rest { background: rgba(107,107,122,0.15); color: var(--muted); }
 
 .day-detail { display: none; }
@@ -142,12 +143,12 @@ textarea.form-input { resize: none; height: 60px; }
 
 .feeling-row { display: flex; gap: 8px; }
 .feeling-btn { flex: 1; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; }
-.feeling-btn.sel { border-color: var(--accent); background: rgba(200,241,53,0.08); color: var(--accent); }
+.feeling-btn.sel { border-color: var(--accent); background: rgba(255,107,74,0.08); color: var(--accent); }
 
 .session-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
 .session-btn { padding: 8px 2px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer; text-align: center; }
 .session-btn .s-icon { font-size: 15px; display: block; margin-bottom: 3px; }
-.session-btn.sel { border-color: var(--accent); color: var(--accent); background: rgba(200,241,53,0.07); }
+.session-btn.sel { border-color: var(--accent); color: var(--accent); background: rgba(255,107,74,0.07); }
 
 /* EXERCISE SERIES TRACKER */
 .exo-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
@@ -166,7 +167,7 @@ textarea.form-input { resize: none; height: 60px; }
 .charge-input { width: 70px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--accent); font-size: 14px; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; text-align: center; outline: none; }
 .charge-unit { font-size: 11px; color: var(--muted); width: 20px; }
 
-.ai-box { background: var(--surface); border: 1px solid rgba(200,241,53,0.2); border-radius: 12px; padding: 16px; margin-top: 14px; display: none; }
+.ai-box { background: var(--surface); border: 1px solid rgba(255,107,74,0.2); border-radius: 12px; padding: 16px; margin-top: 14px; display: none; }
 .ai-box.visible { display: block; }
 .ai-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s infinite; }
@@ -174,7 +175,7 @@ textarea.form-input { resize: none; height: 60px; }
 .ai-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
 .ai-text { font-size: 13px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
 
-.btn-primary { width: 100%; padding: 14px; background: var(--accent); color: var(--bg); font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; border: none; border-radius: 10px; cursor: pointer; margin-top: 4px; }
+.btn-primary { width: 100%; padding: 14px; background: var(--accent); color: #FFFFFF; font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; border: none; border-radius: 10px; cursor: pointer; margin-top: 4px; box-shadow: 0 4px 14px rgba(255,107,74,0.35); }
 .btn-primary:active { opacity: 0.8; }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-secondary { width: 100%; padding: 12px; background: var(--surface); color: var(--text); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; margin-top: 8px; }
@@ -228,10 +229,36 @@ textarea.form-input { resize: none; height: 60px; }
 
 /* TODAY SESSIONS LIST IN JOURNAL */
 .today-sessions-list { margin-bottom: 14px; }
+
+/* ALERT BANNER */
+.alert-banner { border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.5; }
+.alert-red { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3); color: var(--text); }
+.alert-orange { background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); color: var(--text); }
+.alert-banner .alert-icon { font-size: 16px; flex-shrink: 0; }
+.alert-banner b { color: var(--white); }
+
+/* TREND CARD */
+.trend-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.trend-row:last-child { border-bottom: none; }
+.trend-label { font-size: 12px; color: var(--text); font-weight: 500; }
+.trend-value { display: flex; align-items: center; gap: 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; }
+.trend-up { color: var(--green); }
+.trend-down { color: var(--red); }
+.trend-flat { color: var(--muted); }
+
+/* SVG CHARTS */
+.chart-svg-wrap { width: 100%; overflow-x: auto; }
+.chart-bar-label { font-size: 9px; fill: var(--muted); }
+.chart-dot-green { fill: var(--green); }
+.chart-dot-yellow { fill: var(--yellow); }
+.chart-dot-red { fill: var(--red); }
+.chart-dot-grey { fill: var(--muted); }
+.chart-line { stroke: var(--accent); stroke-width: 2; fill: none; }
+.chart-axis { stroke: var(--border); stroke-width: 1; }
 .today-session-chip { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 12px; color: var(--text); }
 .today-session-chip .tsc-icon { font-size: 14px; }
 .today-session-chip .tsc-label { flex: 1; font-weight: 600; }
-.add-session-btn { width: 100%; padding: 12px; background: rgba(200,241,53,0.06); border: 1px dashed var(--accent); border-radius: 10px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-bottom: 14px; }
+.add-session-btn { width: 100%; padding: 12px; background: rgba(255,107,74,0.06); border: 1px dashed var(--accent); border-radius: 10px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-bottom: 14px; }
 </style>
 </head>
 <body>
@@ -387,6 +414,8 @@ textarea.form-input { resize: none; height: 60px; }
       <div class="page-sub" id="today-date"></div>
     </div>
   </div>
+
+  <div id="alert-banner" style="display:none;"></div>
 
   <!-- TODAY ALREADY-LOGGED SESSIONS -->
   <div class="today-sessions-list" id="today-sessions-list"></div>
@@ -567,6 +596,19 @@ textarea.form-input { resize: none; height: 60px; }
       <div class="page-sub">Suivi semaine par semaine</div>
     </div>
   </div>
+
+  <div class="card" id="trend-card" style="display:none;">
+    <div class="card-label">Charge & tendance — 7 derniers jours</div>
+    <div id="trend-content"></div>
+  </div>
+
+  <div class="card" id="chart-card" style="display:none;">
+    <div class="card-label">Sommeil — 14 derniers jours</div>
+    <div id="sleep-chart"></div>
+    <div class="card-label" style="margin-top:18px;">Score Whoop — 14 derniers jours</div>
+    <div id="score-chart"></div>
+  </div>
+
   <div id="histo-content">
     <div class="empty-state"><div class="e-icon">📊</div><div>Pas encore de données.<br>Log ta première journée pour commencer.</div></div>
   </div>
@@ -660,8 +702,8 @@ function showPage(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'histo') renderHistory();
-  if (id === 'journal') renderJournalState();
+  if (id === 'histo') { renderHistory(); renderTrendCard(); renderCharts(); }
+  if (id === 'journal') { renderJournalState(); renderAlertBanner(); }
   if (id === 'prog') updateGoalBar();
 }
 
@@ -907,8 +949,8 @@ function getLastChargeFor(exoId) {
       const s = d.sessions[j];
       if (s.type === 'muscu' && s.exercises) {
         const ex = s.exercises.find(e => e.id === exoId);
-        if (ex && ex.series && ex.series.length) {
-          return ex.series.map(se => se.weight + (se.weight ? 'x' + se.reps : se.reps)).join(' · ');
+        if (ex && ex.weight) {
+          return ex.weight + (ex.unit === 'kg' ? 'kg' : '') + (ex.reps ? ' × ' + ex.reps : '');
         }
       }
     }
@@ -959,29 +1001,14 @@ function selectMuscuType(dayKey, el) {
     block.innerHTML = `
       <div class="exo-block-name">${exo.name}</div>
       <div class="exo-block-last">${lastVal ? 'Dernière fois : <b>' + lastVal + '</b>' : 'Pas encore de données'}</div>
-      <div class="series-container"></div>
-      <button type="button" class="add-serie-btn" onclick="addSerieRow(this)">+ Ajouter une série</button>
+      <div class="serie-row" style="margin-top:8px; margin-bottom:0;">
+        <input type="number" class="serie-input exo-weight" placeholder="${exo.unit === 'kg' ? 'kg' : ''}">
+        <div class="serie-x">×</div>
+        <input type="number" class="serie-input exo-reps" placeholder="rép">
+      </div>
     `;
     detail.appendChild(block);
-    addSerieRow(block.querySelector('.add-serie-btn'));
   });
-}
-
-function addSerieRow(btn) {
-  const block = btn.closest('.exo-block');
-  const container = block.querySelector('.series-container');
-  const unit = block.dataset.unit;
-  const serieNum = container.children.length + 1;
-
-  const row = document.createElement('div');
-  row.className = 'serie-row';
-  row.innerHTML = `
-    <div class="serie-label">S${serieNum}</div>
-    <input type="number" class="serie-input serie-weight" placeholder="${unit === 'kg' ? 'kg' : ''}">
-    <div class="serie-x">×</div>
-    <input type="number" class="serie-input serie-reps" placeholder="rép">
-  `;
-  container.appendChild(row);
 }
 
 function collectMuscuData() {
@@ -989,24 +1016,17 @@ function collectMuscuData() {
   const exercises = [];
   blocks.forEach(block => {
     const exoId = block.dataset.exoId;
+    const unit = block.dataset.unit;
     const name = block.querySelector('.exo-block-name').textContent;
-    const rows = block.querySelectorAll('.serie-row');
-    const series = [];
-    rows.forEach(row => {
-      const weight = row.querySelector('.serie-weight').value;
-      const reps = row.querySelector('.serie-reps').value;
-      if (weight || reps) series.push({ weight: weight || null, reps: reps || null });
-    });
-    if (series.length) exercises.push({ id: exoId, name, series });
+    const weight = block.querySelector('.exo-weight').value;
+    const reps = block.querySelector('.exo-reps').value;
+    if (weight || reps) exercises.push({ id: exoId, name, weight: weight || null, reps: reps || null, unit });
   });
   return exercises;
 }
 
 function formatMuscuSummary(exercises) {
-  return exercises.map(e => {
-    const seriesStr = e.series.map(s => `${s.weight || '?'}${s.weight ? 'kg' : ''}x${s.reps || '?'}`).join(', ');
-    return `${e.name}: ${seriesStr}`;
-  }).join(' · ');
+  return exercises.map(e => `${e.name}: ${e.weight || '?'}${e.unit === 'kg' && e.weight ? 'kg' : ''}${e.reps ? ' × ' + e.reps : ''}`).join(' · ');
 }
 
 // ============================================================
@@ -1199,6 +1219,177 @@ function updateGoalBar() {
 }
 
 // ============================================================
+// TREND & ALERT ANALYSIS (7-day rolling)
+// ============================================================
+function getLastNDays(n) {
+  const sorted = [...journalData].sort((a,b) => a.dateKey.localeCompare(b.dateKey));
+  return sorted.slice(-n);
+}
+
+function avgOf(arr) {
+  const valid = arr.filter(v => v !== null && v !== undefined && !isNaN(v));
+  if (!valid.length) return null;
+  return valid.reduce((a,b) => a+b, 0) / valid.length;
+}
+
+function computeTrends() {
+  const last7 = getLastNDays(7);
+  const prev7 = getLastNDays(14).slice(0, 7);
+
+  const sleepNow = avgOf(last7.map(d => d.whoop?.sleep ? parseFloat(d.whoop.sleep) : null));
+  const sleepPrev = avgOf(prev7.map(d => d.whoop?.sleep ? parseFloat(d.whoop.sleep) : null));
+
+  const scoreMap = { green: 85, yellow: 50, red: 15 };
+  const scoreNow = avgOf(last7.map(d => d.whoop?.percent || scoreMap[d.whoop?.score] || null));
+  const scorePrev = avgOf(prev7.map(d => d.whoop?.percent || scoreMap[d.whoop?.score] || null));
+
+  let sessionCount = 0;
+  last7.forEach(d => sessionCount += (d.sessions ? d.sessions.length : 0));
+
+  let modifCount = 0;
+  last7.forEach(d => (d.sessions||[]).forEach(s => { if (s.modif) modifCount++; }));
+
+  return { sleepNow, sleepPrev, scoreNow, scorePrev, sessionCount, modifCount, last7 };
+}
+
+function trendArrow(now, prev) {
+  if (now === null || prev === null) return { cls: 'trend-flat', arrow: '–' };
+  const diff = now - prev;
+  if (Math.abs(diff) < (prev * 0.03)) return { cls: 'trend-flat', arrow: '→' };
+  return diff > 0 ? { cls: 'trend-up', arrow: '↑' } : { cls: 'trend-down', arrow: '↓' };
+}
+
+function renderTrendCard() {
+  const card = document.getElementById('trend-card');
+  const content = document.getElementById('trend-content');
+  if (journalData.length < 2) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+
+  const t = computeTrends();
+  const sleepTrend = trendArrow(t.sleepNow, t.sleepPrev);
+  const scoreTrend = trendArrow(t.scoreNow, t.scorePrev);
+
+  content.innerHTML = `
+    <div class="trend-row">
+      <div class="trend-label">Sommeil moyen</div>
+      <div class="trend-value ${sleepTrend.cls}">${t.sleepNow ? t.sleepNow.toFixed(1)+'h' : '—'} ${sleepTrend.arrow}</div>
+    </div>
+    <div class="trend-row">
+      <div class="trend-label">Récup Whoop moyenne</div>
+      <div class="trend-value ${scoreTrend.cls}">${t.scoreNow ? Math.round(t.scoreNow)+'%' : '—'} ${scoreTrend.arrow}</div>
+    </div>
+    <div class="trend-row">
+      <div class="trend-label">Séances réalisées</div>
+      <div class="trend-value trend-flat">${t.sessionCount}</div>
+    </div>
+    ${t.modifCount > 0 ? `<div class="trend-row"><div class="trend-label">Séances modifiées/ratées</div><div class="trend-value trend-down">${t.modifCount}</div></div>` : ''}
+  `;
+}
+
+// ============================================================
+// ALERT BANNER (proactive pattern detection)
+// ============================================================
+function renderAlertBanner() {
+  const banner = document.getElementById('alert-banner');
+  const last3 = getLastNDays(3);
+
+  if (last3.length < 3) { banner.style.display = 'none'; return; }
+
+  const sleeps = last3.map(d => d.whoop?.sleep ? parseFloat(d.whoop.sleep) : null);
+  const allLowSleep = sleeps.every(s => s !== null && s < 6.5);
+
+  const scores = last3.map(d => d.whoop?.score);
+  const allRedOrYellow = scores.every(s => s === 'red' || s === 'yellow');
+  const allRed = scores.every(s => s === 'red');
+
+  if (allRed) {
+    banner.style.display = 'flex';
+    banner.className = 'alert-banner alert-red';
+    banner.innerHTML = `<span class="alert-icon">🔴</span><span><b>3 jours de récup rouge d'affilée.</b> Ton corps demande un vrai temps de repos — pas juste une séance allégée. Considère 1-2 jours de repos complet.</span>`;
+  } else if (allLowSleep) {
+    banner.style.display = 'flex';
+    banner.className = 'alert-banner alert-orange';
+    banner.innerHTML = `<span class="alert-icon">😴</span><span><b>Sommeil sous 6h30 depuis 3 jours.</b> C'est le facteur qui limite ta récup actuellement, pas l'entraînement. Priorité ce soir : te coucher plus tôt.</span>`;
+  } else if (allRedOrYellow) {
+    banner.style.display = 'flex';
+    banner.className = 'alert-banner alert-orange';
+    banner.innerHTML = `<span class="alert-icon">⚠️</span><span><b>Récupération faible 3 jours de suite.</b> Vérifie sommeil, stress, hydratation — et lève un peu le pied cette semaine.</span>`;
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+// ============================================================
+// SVG CHARTS (no external lib)
+// ============================================================
+function buildSleepChart() {
+  const days14 = getLastNDays(14);
+  if (days14.length < 3) return '';
+
+  const w = Math.max(320, days14.length * 32);
+  const h = 100;
+  const padBottom = 18;
+  const maxVal = 9;
+
+  let bars = '';
+  days14.forEach((d, i) => {
+    const sleep = d.whoop?.sleep ? parseFloat(d.whoop.sleep) : 0;
+    const barH = sleep ? (sleep / maxVal) * (h - padBottom) : 0;
+    const x = i * 32 + 6;
+    const y = h - padBottom - barH;
+    const color = sleep >= 7 ? 'var(--green)' : sleep >= 6 ? 'var(--yellow)' : sleep > 0 ? 'var(--red)' : 'var(--border)';
+    bars += `<rect x="${x}" y="${y}" width="20" height="${barH}" rx="3" fill="${color}"></rect>`;
+    bars += `<text x="${x+10}" y="${h-4}" text-anchor="middle" class="chart-bar-label">${d.date.split('/')[0]}</text>`;
+  });
+
+  return `<div class="chart-svg-wrap"><svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    <line x1="0" y1="${h-padBottom}" x2="${w}" y2="${h-padBottom}" class="chart-axis"></line>
+    ${bars}
+  </svg></div>`;
+}
+
+function buildScoreChart() {
+  const days14 = getLastNDays(14);
+  if (days14.length < 3) return '';
+
+  const w = Math.max(320, days14.length * 32);
+  const h = 100;
+  const padBottom = 18;
+  const scoreMap = { green: 85, yellow: 50, red: 15 };
+
+  const points = days14.map((d, i) => {
+    const val = d.whoop?.percent || scoreMap[d.whoop?.score] || null;
+    const x = i * 32 + 16;
+    const y = val !== null ? (h - padBottom) - (val / 100) * (h - padBottom) : null;
+    return { x, y, val, color: d.whoop?.score ? `var(--${d.whoop.score === 'green' ? 'green' : d.whoop.score === 'yellow' ? 'yellow' : 'red'})` : 'var(--muted)', label: d.date.split('/')[0] };
+  });
+
+  const validPoints = points.filter(p => p.y !== null);
+  const pathD = validPoints.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ');
+
+  let dots = '';
+  let labels = '';
+  points.forEach(p => {
+    if (p.y !== null) dots += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${p.color}"></circle>`;
+    labels += `<text x="${p.x}" y="${h-4}" text-anchor="middle" class="chart-bar-label">${p.label}</text>`;
+  });
+
+  return `<div class="chart-svg-wrap"><svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    <line x1="0" y1="${h-padBottom}" x2="${w}" y2="${h-padBottom}" class="chart-axis"></line>
+    <path d="${pathD}" class="chart-line"></path>
+    ${dots}${labels}
+  </svg></div>`;
+}
+
+function renderCharts() {
+  const card = document.getElementById('chart-card');
+  if (journalData.length < 3) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  document.getElementById('sleep-chart').innerHTML = buildSleepChart();
+  document.getElementById('score-chart').innerHTML = buildScoreChart();
+}
+
+// ============================================================
 // HISTORY RENDERING — new card design
 // ============================================================
 function toggleHistoryDetail(idx) {
@@ -1265,6 +1456,7 @@ function renderHistory() {
 // ============================================================
 checkApiKey();
 renderJournalState();
+renderAlertBanner();
 updateGoalBar();
 
 </script>
