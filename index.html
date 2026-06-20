@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Youri — Performance</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap');
 
 :root {
   --bg: #0C0C0E;
@@ -24,34 +24,38 @@
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; padding-bottom: 80px; }
 
-/* API SETUP SCREEN */
-#setup-screen {
-  position: fixed; inset: 0; background: var(--bg); z-index: 999;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 32px 24px;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
+
+/* SETUP SCREEN */
+#setup-screen { position: fixed; inset: 0; background: var(--bg); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 24px; }
 .setup-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
 .setup-logo span { color: var(--accent); }
 .setup-sub { font-size: 12px; color: var(--muted); margin-bottom: 40px; text-align: center; }
 .setup-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; width: 100%; max-width: 400px; }
 .setup-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; display: block; }
-.setup-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; color: var(--text); font-size: 13px; font-family: 'Inter', sans-serif; outline: none; margin-bottom: 16px; transition: border-color 0.2s; }
+.setup-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; color: var(--text); font-size: 13px; font-family: 'Inter', sans-serif; outline: none; margin-bottom: 16px; }
 .setup-input:focus { border-color: var(--accent); }
 .setup-hint { font-size: 11px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
 .setup-hint a { color: var(--accent); }
 
 /* NAV */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
-.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; gap: 4px; background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; gap: 4px; background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
 .nav-btn.active { color: var(--accent); }
 .nav-btn .icon { font-size: 20px; }
 
 .page { display: none; padding: 20px 16px; }
 .page.active { display: block; }
 
-.page-header { margin-bottom: 20px; }
+.page-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; }
 .page-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); }
 .page-title span { color: var(--accent); }
 .page-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
@@ -59,9 +63,18 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
 .card-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
 
+/* TODAY SUMMARY BAR */
+.today-bar { background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(200,241,53,0.02)); border: 1px solid rgba(200,241,53,0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.today-bar-icon { font-size: 22px; }
+.today-bar-text { flex: 1; }
+.today-bar-title { font-weight: 700; font-size: 13px; color: var(--white); }
+.today-bar-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+/* WEEK DAYS */
 .week-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 16px; }
-.day-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 4px; text-align: center; cursor: pointer; transition: all 0.15s; }
+.day-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 4px; text-align: center; cursor: pointer; }
 .day-pill.active { border-color: var(--accent); background: rgba(200,241,53,0.07); }
+.day-pill.is-today { box-shadow: 0 0 0 1px var(--accent) inset; }
 .day-pill .d-name { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
 .day-pill .d-icon { font-size: 16px; margin-bottom: 4px; }
 .day-pill .d-tag { font-size: 8px; font-weight: 700; text-transform: uppercase; padding: 2px 4px; border-radius: 3px; }
@@ -81,6 +94,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .ex-sets { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; color: var(--accent); white-space: nowrap; text-align: right; }
 .ex-reps { font-size: 10px; color: var(--muted); text-align: right; white-space: nowrap; }
 
+/* PLAN COURSE TOGGLE */
+.toggle-link { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-bottom: 12px; }
+#run-plan-block { display: none; }
+#run-plan-block.visible { display: block; }
+
 .run-week-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px; }
 .run-week-num { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
 .run-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -89,15 +107,22 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .run-block-val { font-weight: 600; font-size: 13px; color: var(--white); }
 .run-block-pace { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--blue); }
 
+/* GOAL PROGRESS BAR */
+.goal-bar-track { width: 100%; height: 10px; background: var(--surface); border-radius: 6px; overflow: hidden; margin: 10px 0; }
+.goal-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #9FD632); border-radius: 6px; transition: width 0.4s; }
+.goal-stats { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+.goal-stats b { color: var(--white); }
+
+/* FORMS */
 .form-group { margin-bottom: 14px; }
 .form-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; display: block; }
-.form-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+.form-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; }
 .form-input:focus { border-color: var(--accent); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-textarea.form-input { resize: none; height: 70px; }
+textarea.form-input { resize: none; height: 60px; }
 
 .score-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.score-opt { padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; cursor: pointer; transition: all 0.15s; background: var(--surface); }
+.score-opt { padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; cursor: pointer; background: var(--surface); }
 .score-opt.selected-green { border-color: var(--green); background: rgba(74,222,128,0.1); }
 .score-opt.selected-yellow { border-color: var(--yellow); background: rgba(250,204,21,0.1); }
 .score-opt.selected-red { border-color: var(--red); background: rgba(248,113,113,0.1); }
@@ -108,22 +133,32 @@ textarea.form-input { resize: none; height: 70px; }
 .score-label { font-size: 11px; font-weight: 600; color: var(--text); }
 .score-range { font-size: 10px; color: var(--muted); }
 
-.upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--surface); margin-bottom: 10px; }
-.upload-zone:hover { border-color: var(--accent); background: rgba(200,241,53,0.04); }
+.upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 18px; text-align: center; cursor: pointer; background: var(--surface); margin-bottom: 10px; }
 .upload-zone.has-image { border-color: var(--accent); border-style: solid; }
-.upload-icon { font-size: 28px; margin-bottom: 6px; }
+.upload-icon { font-size: 26px; margin-bottom: 6px; }
 .upload-label { font-size: 12px; font-weight: 600; color: var(--muted); }
-.upload-preview { width: 100%; border-radius: 8px; margin-top: 10px; display: none; }
+.upload-preview { width: 100%; border-radius: 8px; margin-top: 10px; display: none; max-height: 200px; object-fit: cover; }
 .upload-preview.visible { display: block; }
 
 .feeling-row { display: flex; gap: 8px; }
-.feeling-btn { flex: 1; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.15s; }
+.feeling-btn { flex: 1; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; }
 .feeling-btn.sel { border-color: var(--accent); background: rgba(200,241,53,0.08); color: var(--accent); }
 
-.session-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.session-btn { padding: 8px 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; text-align: center; transition: all 0.15s; }
-.session-btn .s-icon { font-size: 16px; display: block; margin-bottom: 3px; }
+.session-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.session-btn { padding: 8px 2px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; cursor: pointer; text-align: center; }
+.session-btn .s-icon { font-size: 15px; display: block; margin-bottom: 3px; }
 .session-btn.sel { border-color: var(--accent); color: var(--accent); background: rgba(200,241,53,0.07); }
+
+/* EXERCISE SERIES TRACKER */
+.exo-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+.exo-block-name { font-weight: 600; font-size: 13px; color: var(--white); margin-bottom: 2px; }
+.exo-block-last { font-size: 10px; color: var(--muted); margin-bottom: 10px; }
+.exo-block-last b { color: var(--accent); }
+.serie-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.serie-label { font-size: 10px; color: var(--muted); width: 38px; flex-shrink: 0; font-weight: 700; }
+.serie-input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; color: var(--accent); font-size: 13px; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; text-align: center; outline: none; }
+.serie-x { color: var(--muted); font-size: 11px; }
+.add-serie-btn { width: 100%; padding: 8px; background: none; border: 1px dashed var(--border); border-radius: 6px; color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; margin-top: 4px; }
 
 .charge-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); gap: 10px; }
 .charge-item:last-child { border-bottom: none; }
@@ -139,15 +174,35 @@ textarea.form-input { resize: none; height: 70px; }
 .ai-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
 .ai-text { font-size: 13px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
 
-.btn-primary { width: 100%; padding: 14px; background: var(--accent); color: var(--bg); font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; border: none; border-radius: 10px; cursor: pointer; transition: opacity 0.2s; margin-top: 4px; }
+.btn-primary { width: 100%; padding: 14px; background: var(--accent); color: var(--bg); font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; border: none; border-radius: 10px; cursor: pointer; margin-top: 4px; }
 .btn-primary:active { opacity: 0.8; }
 .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary { width: 100%; padding: 12px; background: var(--surface); color: var(--text); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; margin-top: 8px; }
 
-.history-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px; }
-.history-date { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
-.history-stats { display: flex; gap: 16px; flex-wrap: wrap; }
-.h-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1; }
-.h-stat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+/* HISTORY - NEW DESIGN */
+.history-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0; margin-bottom: 10px; overflow: hidden; }
+.history-head { display: flex; align-items: center; gap: 12px; padding: 14px; }
+.history-score-circle { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; font-weight: 800; }
+.circle-green { background: rgba(74,222,128,0.15); color: var(--green); border: 2px solid var(--green); }
+.circle-yellow { background: rgba(250,204,21,0.15); color: var(--yellow); border: 2px solid var(--yellow); }
+.circle-red { background: rgba(248,113,113,0.15); color: var(--red); border: 2px solid var(--red); }
+.circle-grey { background: rgba(107,107,122,0.15); color: var(--muted); border: 2px solid var(--muted); }
+.history-head-text { flex: 1; }
+.history-date { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.history-summary { font-size: 13px; font-weight: 700; color: var(--white); margin-top: 2px; }
+.history-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.history-badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+.hb-warn { background: rgba(251,146,60,0.15); color: var(--orange); }
+.hb-info { background: rgba(96,165,250,0.15); color: var(--blue); }
+.history-toggle { font-size: 16px; color: var(--muted); padding: 8px; flex-shrink: 0; }
+.history-detail { display: none; padding: 0 14px 14px; border-top: 1px solid var(--border); }
+.history-detail.open { display: block; }
+.history-stats { display: flex; gap: 16px; flex-wrap: wrap; padding-top: 12px; }
+.h-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); line-height: 1; }
+.h-stat-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.history-ai-text { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text); line-height: 1.55; }
+.history-sessions { margin-top: 8px; }
+.history-session-line { font-size: 11px; color: var(--accent); padding: 4px 0; }
 
 .recup-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
 .recup-item:last-child { border-bottom: none; }
@@ -165,11 +220,18 @@ textarea.form-input { resize: none; height: 70px; }
 .empty-state { text-align: center; padding: 32px 16px; color: var(--muted); font-size: 13px; }
 .empty-state .e-icon { font-size: 36px; margin-bottom: 10px; }
 
-.seance-modif-btn { width: 100%; padding: 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; margin-bottom: 12px; transition: all 0.15s; }
+.seance-modif-btn { width: 100%; padding: 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; margin-bottom: 12px; }
 .seance-modif-btn.sel { border-color: var(--orange); color: var(--orange); background: rgba(251,146,60,0.07); }
 
 .settings-link { text-align: center; padding: 16px; font-size: 11px; color: var(--muted); cursor: pointer; }
 .settings-link span { color: var(--accent); text-decoration: underline; }
+
+/* TODAY SESSIONS LIST IN JOURNAL */
+.today-sessions-list { margin-bottom: 14px; }
+.today-session-chip { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 12px; color: var(--text); }
+.today-session-chip .tsc-icon { font-size: 14px; }
+.today-session-chip .tsc-label { flex: 1; font-weight: 600; }
+.add-session-btn { width: 100%; padding: 12px; background: rgba(200,241,53,0.06); border: 1px dashed var(--accent); border-radius: 10px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-bottom: 14px; }
 </style>
 </head>
 <body>
@@ -192,8 +254,20 @@ textarea.form-input { resize: none; height: 70px; }
 <!-- ========== PAGE: PROGRAMME ========== -->
 <div id="page-prog" class="page active">
   <div class="page-header">
-    <div class="page-title">YOURI <span>PERF</span></div>
-    <div class="page-sub">33 ans · 1m83 · 79kg · Cavaillon</div>
+    <div>
+      <div class="page-title">YOURI <span>PERF</span></div>
+      <div class="page-sub">33 ans · 1m83 · 79kg · Cavaillon</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIF 10KM PROGRESS -->
+  <div class="card">
+    <div class="card-label">🎯 Objectif — 10km sous 50 min</div>
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goal-fill" style="width:25%"></div></div>
+    <div class="goal-stats">
+      <span>Semaine <b id="goal-week">3-4</b>/8</span>
+      <span>Meilleure allure : <b id="goal-best-pace">—</b></span>
+    </div>
   </div>
 
   <div class="card">
@@ -210,66 +284,67 @@ textarea.form-input { resize: none; height: 70px; }
 
     <div id="detail-lun" class="day-detail active">
       <div class="detail-title">💪 Pec · Épaules · Triceps</div>
-      <div class="ex-item"><div><div class="ex-name">Développé couché barre</div><div class="ex-tip">Cage · Prise légèrement + large que les épaules · Descente 2 sec · Coudes à 75°</div></div><div><div class="ex-sets">4×8</div><div class="ex-reps">60kg · 2 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Dips</div><div class="ex-tip">Buste légèrement incliné vers l'avant · Descends à 90° · Cible les pecs</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">Poids corps · 1min30</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Développé militaire haltères</div><div class="ex-tip">Debout · Haltères aux oreilles · Pousse droit au plafond · Clé look CR7</div></div><div><div class="ex-sets">4×10</div><div class="ex-reps">8kg · 1min30</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Élévations latérales</div><div class="ex-tip">Bras légèrement fléchis · Monte à l'horizontal · Descente lente 3 sec</div></div><div><div class="ex-sets">4×15</div><div class="ex-reps">6kg · 1 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Écarté haltères sur banc</div><div class="ex-tip">Bras fléchis · Comme si tu enlaces un arbre · Contraction en haut</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">8kg · 1 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Élévations arrière (oiseau)</div><div class="ex-tip">Genou sur banc · Penché · Tire les coudes vers l'arrière · Deltoïdes postérieurs</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">4kg · 1 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Développé couché barre</div><div class="ex-tip">Prise légèrement + large que les épaules · Descente 2 sec · Coudes à 75°</div></div><div><div class="ex-sets">4×8</div><div class="ex-reps">Lourd · 2 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Dips</div><div class="ex-tip">Buste légèrement incliné vers l'avant · Descends à 90° · Cible les pecs</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">Poids corps</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Développé militaire haltères</div><div class="ex-tip">Debout · Haltères aux oreilles · Pousse droit au plafond</div></div><div><div class="ex-sets">4×10</div><div class="ex-reps">1min30</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Élévations latérales</div><div class="ex-tip">Bras légèrement fléchis · Monte à l'horizontal</div></div><div><div class="ex-sets">4×15</div><div class="ex-reps">1 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Écarté haltères sur banc</div><div class="ex-tip">Bras fléchis · Contraction en haut</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Élévations arrière (oiseau)</div><div class="ex-tip">Genou sur banc · Tire les coudes vers l'arrière</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min</div></div></div>
     </div>
 
     <div id="detail-mar" class="day-detail">
       <div class="detail-title">🏃 Course travaillée</div>
-      <div class="ex-item"><div><div class="ex-name">Échauffement</div><div class="ex-tip">10 min à allure très facile — 6'00/km ou plus lent</div></div><div><div class="ex-sets">10 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Blocs rapides</div><div class="ex-tip">2×3km · 3 min de récup facile entre les blocs · Reprise progressive après côte</div></div><div><div class="ex-sets">2×3km</div><div class="ex-reps">4'45/km</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Retour au calme</div><div class="ex-tip">5-10 min très lent + étirements mollets et ischio</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Échauffement</div><div class="ex-tip">10 min allure très facile</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Blocs rapides</div><div class="ex-tip">3 min récup facile entre les blocs</div></div><div><div class="ex-sets">2×3km</div><div class="ex-reps">4'45/km</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Retour au calme</div><div class="ex-tip">5-10 min très lent + étirements</div></div><div><div class="ex-sets">10 min</div></div></div>
     </div>
 
     <div id="detail-mer" class="day-detail">
       <div class="detail-title">💪 Dos · Biceps · Abdos</div>
-      <div class="ex-item"><div><div class="ex-name">Tractions prise large</div><div class="ex-tip">Pronation · Descends complètement · Menton au-dessus de la barre</div></div><div><div class="ex-sets">4×max</div><div class="ex-reps">2 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Tractions prise serrée</div><div class="ex-tip">Paumes vers toi (supination) · Biceps + bas du dos</div></div><div><div class="ex-sets">3×max</div><div class="ex-reps">2 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Rowing barre</div><div class="ex-tip">Penché à 45° · Tire vers le nombril · Omoplates vers le centre</div></div><div><div class="ex-sets">4×10</div><div class="ex-reps">1 min 30</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Rowing haltère unilatéral</div><div class="ex-tip">Main + genou sur banc · Tire le coude vers le plafond · Grande amplitude</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min/côté</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Curl barre</div><div class="ex-tip">Coudes fixes contre le corps · Montée explosive · Descente lente 3 sec</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Curl marteau haltères</div><div class="ex-tip">Prise neutre (pouce vers le haut) · Alterne · Épaisseur du bras</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">1 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Circuit abdos — 3 tours</div><div class="ex-tip">Planche 45s → Crunchs obliques 20 rép → Relevés de jambes 15 rép · 30s entre tours</div></div><div><div class="ex-sets">3 tours</div><div class="ex-reps">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Tractions prise large</div><div class="ex-tip">Pronation · Descends complètement</div></div><div><div class="ex-sets">4×max</div><div class="ex-reps">2 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Tractions prise serrée</div><div class="ex-tip">Supination · Biceps + bas du dos</div></div><div><div class="ex-sets">3×max</div><div class="ex-reps">2 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Rowing barre</div><div class="ex-tip">Penché à 45° · Tire vers le nombril</div></div><div><div class="ex-sets">4×10</div><div class="ex-reps">1min30</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Rowing haltère unilatéral</div><div class="ex-tip">Main + genou sur banc</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min/côté</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Curl barre</div><div class="ex-tip">Coudes fixes contre le corps</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">1 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Curl marteau haltères</div><div class="ex-tip">Prise neutre · Alterne</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">1 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Circuit abdos — 3 tours</div><div class="ex-tip">Planche 45s → Obliques 20 rép → Jambes 15 rép</div></div><div><div class="ex-sets">3 tours</div><div class="ex-reps">10 min</div></div></div>
     </div>
 
     <div id="detail-jeu" class="day-detail">
-      <div class="detail-title">🧘 Mobilité + Renfo bas du corps</div>
-      <div class="ex-item"><div><div class="ex-name">Yoga flow / Reformer — 20-30 min</div><div class="ex-tip">Down Dog app ou studio reformer · Souplesse active + gainage profond</div></div><div><div class="ex-sets">30 min</div></div></div>
-      <div class="section-divider"></div>
-      <div class="ex-item"><div><div class="ex-name">Squats bulgares</div><div class="ex-tip">Pied arrière sur banc · Descends lentement · Fessiers + quad</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">Par jambe</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Hip thrust</div><div class="ex-tip">Dos sur banc · Barre ou haltère sur les hanches · Pousse vers le plafond</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">2 sec en haut</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Nordic curl</div><div class="ex-tip">Pieds bloqués sous la cage · Descends lentement en résistant · Prévention ischio</div></div><div><div class="ex-sets">3×6</div><div class="ex-reps">Lent · 3 sec</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Mollets lestés</div><div class="ex-tip">Haltère dans une main · Pied sur marche · Monte sur la pointe</div></div><div><div class="ex-sets">3×15</div><div class="ex-reps">Par jambe</div></div></div>
+      <div class="detail-title">🧘 Mobilité + Bas du corps</div>
+      <div class="ex-item"><div><div class="ex-name">Yoga flow / Reformer</div><div class="ex-tip">Souplesse active + gainage profond</div></div><div><div class="ex-sets">30 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Squats bulgares</div><div class="ex-tip">Pied arrière sur banc</div></div><div><div class="ex-sets">3×10</div><div class="ex-reps">Par jambe</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Hip thrust</div><div class="ex-tip">Pousse les hanches vers le plafond</div></div><div><div class="ex-sets">3×12</div><div class="ex-reps">2 sec haut</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Nordic curl</div><div class="ex-tip">Prévention blessure ischio</div></div><div><div class="ex-sets">3×6</div><div class="ex-reps">Lent</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Mollets lestés</div><div class="ex-tip">Monte sur la pointe</div></div><div><div class="ex-sets">3×15</div><div class="ex-reps">Par jambe</div></div></div>
     </div>
 
     <div id="detail-ven" class="day-detail">
       <div class="detail-title">⚡ Full Haut — Supersets</div>
-      <div class="ex-item"><div><div class="ex-name">Superset 1 · Développé haltères + Tractions</div><div class="ex-tip">Développé haltères 10 rép → Tractions max · Pas de pause entre les 2</div></div><div><div class="ex-sets">4 rounds</div><div class="ex-reps">90s entre</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Superset 2 · Militaire + Rowing</div><div class="ex-tip">Militaire haltères 10 rép → Rowing haltère 10 rép/côté</div></div><div><div class="ex-sets">3 rounds</div><div class="ex-reps">90s entre</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Superset 3 · Latérales + Curl</div><div class="ex-tip">Élévations latérales 15 rép → Curl haltères 12 rép</div></div><div><div class="ex-sets">3 rounds</div><div class="ex-reps">60s entre</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Finisher abdos — 10 min</div><div class="ex-tip">Crunchs ballon yoga 20 rép · Planche bras sur ballon 30s · Mountain climbers 20 rép · 3 tours</div></div><div><div class="ex-sets">3 tours</div><div class="ex-reps">Non-stop</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Développé haltères + Tractions</div><div class="ex-tip">Pas de pause entre les 2</div></div><div><div class="ex-sets">4 rounds</div><div class="ex-reps">90s entre</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Militaire + Rowing</div><div class="ex-tip">10 rép chaque</div></div><div><div class="ex-sets">3 rounds</div><div class="ex-reps">90s entre</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Latérales + Curl</div><div class="ex-tip">Finition pump</div></div><div><div class="ex-sets">3 rounds</div><div class="ex-reps">60s entre</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Finisher abdos</div><div class="ex-tip">Ballon yoga · Mountain climbers</div></div><div><div class="ex-sets">3 tours</div><div class="ex-reps">Non-stop</div></div></div>
     </div>
 
     <div id="detail-sam" class="day-detail">
       <div class="detail-title">🏃 Sortie longue progressive</div>
-      <div class="ex-item"><div><div class="ex-name">Sortie longue</div><div class="ex-tip">Allure confortable · Tu dois pouvoir parler · Augmente de 1km par semaine</div></div><div><div class="ex-sets">9→10km</div><div class="ex-reps">5'00-5'10/km</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Hydratation</div><div class="ex-tip">Eau toutes les 20 min · Au-delà de 8km : datte ou gel si besoin</div></div><div><div class="ex-sets">≥ 20 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Après la sortie</div><div class="ex-tip">10 min étirements · Mollets · Ischio · Psoas · Quadri</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Sortie longue</div><div class="ex-tip">Allure confortable · Tu dois pouvoir parler</div></div><div><div class="ex-sets">9→10km</div><div class="ex-reps">5'00-5'10/km</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Hydratation</div><div class="ex-tip">Eau toutes les 20 min</div></div><div><div class="ex-sets">≥ 20 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Après la sortie</div><div class="ex-tip">10 min étirements</div></div><div><div class="ex-sets">10 min</div></div></div>
     </div>
 
     <div id="detail-dim" class="day-detail">
       <div class="detail-title">😴 Repos — Récupération</div>
-      <div class="ex-item"><div><div class="ex-name">Whoop rouge ce matin ?</div><div class="ex-tip">Repos total. C'est une décision de performance.</div></div><div><div class="ex-sets">0 effort</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Option : marche 30 min</div><div class="ex-tip">Balade, nature. Rien de plus.</div></div><div><div class="ex-sets">Optionnel</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Stretching complet 20 min</div><div class="ex-tip">Psoas · Ischio · Épaules · Dos · Mollets</div></div><div><div class="ex-sets">20 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Whoop rouge ce matin ?</div><div class="ex-tip">Repos total. Décision de performance.</div></div><div><div class="ex-sets">0 effort</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Option : marche 30 min</div><div class="ex-tip">Balade, nature</div></div><div><div class="ex-sets">Optionnel</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Stretching complet</div><div class="ex-tip">Psoas · Ischio · Épaules · Dos</div></div><div><div class="ex-sets">20 min</div></div></div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="toggle-link" onclick="toggleRunPlan()">📊 Voir le plan course complet (8 semaines)</div>
+
+  <div class="card" id="run-plan-block">
     <div class="card-label">Plan course — Objectif 10km &lt; 50 min</div>
     <div class="run-week-card">
       <div class="run-week-num">Semaine 3-4 — Niveau actuel</div>
@@ -307,44 +382,60 @@ textarea.form-input { resize: none; height: 70px; }
 <!-- ========== PAGE: JOURNAL ========== -->
 <div id="page-journal" class="page">
   <div class="page-header">
-    <div class="page-title">JOURNAL <span>DU JOUR</span></div>
-    <div class="page-sub" id="today-date"></div>
+    <div>
+      <div class="page-title">JOURNAL <span>DU JOUR</span></div>
+      <div class="page-sub" id="today-date"></div>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-label">Score Whoop — photo ou saisie manuelle</div>
+  <!-- TODAY ALREADY-LOGGED SESSIONS -->
+  <div class="today-sessions-list" id="today-sessions-list"></div>
+
+  <!-- WHOOP MATIN -->
+  <div class="card" id="whoop-morning-card">
+    <div class="card-label">Score Whoop ce matin</div>
     <div class="upload-zone" id="whoop-zone" onclick="document.getElementById('whoop-file').click()">
       <div class="upload-icon">⌚</div>
-      <div class="upload-label">Appuie pour uploader ton screenshot Whoop</div>
+      <div class="upload-label">Photo de ton score Whoop</div>
       <img id="whoop-preview" class="upload-preview" />
     </div>
-    <input type="file" id="whoop-file" accept="image/*" style="display:none" onchange="handleWhoopUpload(event)">
+    <input type="file" id="whoop-file" accept="image/*" style="display:none" onchange="handleImgUpload(event,'whoop')">
+
+    <div class="upload-zone" id="whoop-sleep-zone" onclick="document.getElementById('whoop-sleep-file').click()" style="margin-top:6px;">
+      <div class="upload-icon">😴</div>
+      <div class="upload-label">+ Photo détail sommeil (optionnel — léger/profond/paradoxal)</div>
+      <img id="whoop-sleep-preview" class="upload-preview" />
+    </div>
+    <input type="file" id="whoop-sleep-file" accept="image/*" style="display:none" onchange="handleImgUpload(event,'whoopSleep')">
+
     <div class="card-label" style="margin-top:12px;">Ou saisie manuelle</div>
     <div class="score-selector">
       <div class="score-opt" onclick="selectScore('green', this)"><div class="score-dot dot-g"></div><div class="score-label">Vert</div><div class="score-range">67–100%</div></div>
       <div class="score-opt" onclick="selectScore('yellow', this)"><div class="score-dot dot-y"></div><div class="score-label">Jaune</div><div class="score-range">34–66%</div></div>
       <div class="score-opt" onclick="selectScore('red', this)"><div class="score-dot dot-r"></div><div class="score-label">Rouge</div><div class="score-range">0–33%</div></div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-label">Sommeil</div>
-    <div class="form-row">
+    <div class="form-row" style="margin-top:12px;">
       <div class="form-group" style="margin-bottom:0"><label class="form-label">Heures dormies</label><input type="number" class="form-input" id="j-sleep" placeholder="6.5" step="0.5" min="3" max="12"></div>
       <div class="form-group" style="margin-bottom:0"><label class="form-label">HRV (si dispo)</label><input type="number" class="form-input" id="j-hrv" placeholder="65"></div>
     </div>
+    <button class="btn-primary" onclick="logMorning()" id="morning-btn" style="margin-top:14px;">Enregistrer le matin</button>
   </div>
 
-  <div class="card">
-    <div class="card-label">Séance du jour</div>
+  <!-- ADD SESSION BUTTON -->
+  <div class="add-session-btn" id="add-session-btn" onclick="openSessionForm()" style="display:none;">+ Ajouter une séance</div>
+
+  <!-- SESSION FORM -->
+  <div class="card" id="session-form-card" style="display:none;">
+    <div class="card-label">Quelle séance ?</div>
     <div class="session-row" style="margin-bottom: 12px;">
       <div class="session-btn" onclick="selectSession('muscu', this)"><span class="s-icon">💪</span>Muscu</div>
       <div class="session-btn" onclick="selectSession('course', this)"><span class="s-icon">🏃</span>Course</div>
+      <div class="session-btn" onclick="selectSession('velo', this)"><span class="s-icon">🚴</span>Vélo</div>
       <div class="session-btn" onclick="selectSession('yoga', this)"><span class="s-icon">🧘</span>Yoga</div>
-      <div class="session-btn" onclick="selectSession('repos', this)"><span class="s-icon">😴</span>Repos</div>
+      <div class="session-btn" onclick="selectSession('autre', this)"><span class="s-icon">⚡</span>Autre</div>
     </div>
 
-    <div id="modif-section" style="display:none; margin-bottom:12px;">
+    <div id="modif-section" style="display:none;">
       <div class="seance-modif-btn" id="modif-btn" onclick="toggleModif(this)">⚠️ Séance modifiée ou non faite ?</div>
       <div id="modif-fields" style="display:none;">
         <select class="form-input" id="modif-raison" style="margin-bottom:8px;">
@@ -356,48 +447,70 @@ textarea.form-input { resize: none; height: 70px; }
           <option value="remplacee">Remplacée par autre chose</option>
           <option value="partielle">Séance partielle</option>
         </select>
-        <textarea class="form-input" id="modif-note" placeholder="Détails... ex: remplacé développé couché par haltères, côte douloureuse"></textarea>
+        <textarea class="form-input" id="modif-note" placeholder="Détails..."></textarea>
       </div>
     </div>
 
     <div id="muscu-fields" style="display:none;">
-      <div class="card-label" style="margin-top:8px;">Charges du jour — <span id="muscu-day-label" style="color:var(--accent)"></span></div>
-      <div id="muscu-charges-list"></div>
+      <div class="card-label" style="margin-top:12px;">Charges — <span id="muscu-day-label" style="color:var(--accent)"></span></div>
+      <div id="muscu-exo-list"></div>
     </div>
 
     <div id="course-fields" style="display:none;">
-      <div class="card-label" style="margin-top:8px;">Course — photo ou saisie</div>
+      <div class="card-label" style="margin-top:12px;">Course — photo ou saisie</div>
       <div class="upload-zone" id="nike-zone" onclick="document.getElementById('nike-file').click()">
         <div class="upload-icon">🏃</div>
-        <div class="upload-label">Appuie pour uploader ton screenshot Nike Run Club</div>
+        <div class="upload-label">Screenshot Nike Run Club</div>
         <img id="nike-preview" class="upload-preview" />
       </div>
-      <input type="file" id="nike-file" accept="image/*" style="display:none" onchange="handleNikeUpload(event)">
-      <div class="card-label" style="margin-top:12px;">Ou saisie manuelle</div>
-      <div class="form-row">
+      <input type="file" id="nike-file" accept="image/*" style="display:none" onchange="handleImgUpload(event,'nike')">
+      <div class="form-row" style="margin-top:8px;">
         <div class="form-group" style="margin-bottom:8px;"><label class="form-label">Distance (km)</label><input type="number" class="form-input" id="j-km" placeholder="8.5" step="0.1"></div>
         <div class="form-group" style="margin-bottom:8px;"><label class="form-label">Allure moy.</label><input type="text" class="form-input" id="j-pace" placeholder="5'10"></div>
       </div>
       <div class="form-group" style="margin-bottom:0;"><label class="form-label">FC moyenne (bpm)</label><input type="number" class="form-input" id="j-fc" placeholder="155"></div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-label">Ressenti global</div>
+    <div id="velo-fields" style="display:none;">
+      <div class="card-label" style="margin-top:12px;">Vélo</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Durée (min)</label><input type="number" class="form-input" id="j-velo-duree" placeholder="60"></div>
+        <div class="form-group"><label class="form-label">Distance (km)</label><input type="number" class="form-input" id="j-velo-km" placeholder="25"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:0;"><label class="form-label">FC moyenne (bpm)</label><input type="number" class="form-input" id="j-velo-fc" placeholder="130"></div>
+    </div>
+
+    <div id="autre-fields" style="display:none;">
+      <div class="card-label" style="margin-top:12px;">Quel sport ?</div>
+      <div class="form-group"><input type="text" class="form-input" id="j-autre-nom" placeholder="Tennis, foot, padel..."></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Durée (min)</label><input type="number" class="form-input" id="j-autre-duree" placeholder="60"></div>
+        <div class="form-group"><label class="form-label">Intensité</label>
+          <select class="form-input" id="j-autre-intensite">
+            <option value="légère">Légère</option>
+            <option value="modérée">Modérée</option>
+            <option value="intense">Intense</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-label" style="margin-top:12px;">Ressenti</div>
     <div class="feeling-row">
       <div class="feeling-btn" onclick="selectFeeling('💪 Top', this)">💪 Top</div>
       <div class="feeling-btn" onclick="selectFeeling('👍 Bien', this)">👍 Bien</div>
       <div class="feeling-btn" onclick="selectFeeling('😐 Moyen', this)">😐 Moyen</div>
       <div class="feeling-btn" onclick="selectFeeling('😴 Fatigué', this)">😴 Fatigué</div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-label">Note du jour (optionnel)</div>
-    <textarea class="form-input" id="j-note" placeholder="Douleur, nutrition, stress boulot, nuit difficile..."></textarea>
-  </div>
+    <div class="form-group" style="margin-top:12px; margin-bottom:0;">
+      <label class="form-label">Note (optionnel)</label>
+      <textarea class="form-input" id="j-note" placeholder="Douleur, contexte, stress..."></textarea>
+    </div>
 
-  <button class="btn-primary" onclick="analyzeDay()" id="analyze-btn">Analyser ma journée</button>
+    <button class="btn-primary" onclick="analyzeSession()" id="analyze-btn">Analyser cette séance</button>
+    <button class="btn-secondary" onclick="closeSessionForm()">Annuler</button>
+  </div>
 
   <div class="ai-box" id="ai-response">
     <div class="ai-header"><div class="ai-dot"></div><div class="ai-label">Analyse</div></div>
@@ -408,37 +521,41 @@ textarea.form-input { resize: none; height: 70px; }
 <!-- ========== PAGE: RÉCUP ========== -->
 <div id="page-recup" class="page">
   <div class="page-header">
-    <div class="page-title">RÉCUP <span>& SOIN</span></div>
-    <div class="page-sub">Récupération · Bien vieillir · Peau</div>
+    <div>
+      <div class="page-title">RÉCUP <span>& SOIN</span></div>
+      <div class="page-sub">Récupération · Bien vieillir · Peau</div>
+    </div>
   </div>
   <div class="card">
     <div class="card-label">Récupération — Protocoles</div>
-    <div class="recup-item"><div class="recup-icon">🧊</div><div><div class="recup-title">Bain froid / Douche froide</div><div class="recup-text">Après chaque séance intense. 30-60 sec d'eau froide. Réduit l'inflammation, améliore le HRV dès le lendemain.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🌡️</div><div><div class="recup-title">Hammam / Sauna</div><div class="recup-text">1-2x par semaine. Pas immédiatement après une séance — attends 3-4h. 15-20 min à 80°C. Récupération profonde + qualité du sommeil.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">👢</div><div><div class="recup-title">Pressothérapie</div><div class="recup-text">Après sortie longue ou semaine chargée. Drainage lymphatique des jambes. 30-45 min. 1x/semaine en phase intense.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🪵</div><div><div class="recup-title">Foam roller</div><div class="recup-text">10 min après salle ou course. Quadri, ischio, mollets, dos. Réduit les courbatures de 30-40%.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">💧</div><div><div class="recup-title">Hydratation — 2.5L/jour</div><div class="recup-text">Minimum en PACA avec ton volume sport. Commence dès le réveil avec un grand verre d'eau.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🧘</div><div><div class="recup-title">Stretching dimanche — 15 min</div><div class="recup-text">Psoas 60s/côté · Ischio 60s/jambe · Pectoraux contre mur 60s · Dos sur ballon yoga 90s · Mollets 45s/côté.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🧊</div><div><div class="recup-title">Bain froid / Douche froide</div><div class="recup-text">Après séance intense. 30-60 sec d'eau froide. Réduit l'inflammation, améliore le HRV dès le lendemain.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🌡️</div><div><div class="recup-title">Hammam / Sauna</div><div class="recup-text">1-2x/semaine. Pas immédiatement après une séance — attends 3-4h. 15-20 min à 80°C.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">👢</div><div><div class="recup-title">Pressothérapie</div><div class="recup-text">Après sortie longue ou semaine chargée. 30-45 min.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🪵</div><div><div class="recup-title">Foam roller</div><div class="recup-text">10 min après salle ou course. Réduit les courbatures de 30-40%.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">💧</div><div><div class="recup-title">Hydratation — 2.5L/jour</div><div class="recup-text">Minimum en PACA avec ton volume sport.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🧘</div><div><div class="recup-title">Stretching dimanche — 15 min</div><div class="recup-text">Psoas · Ischio · Pectoraux · Dos · Mollets.</div></div></div>
   </div>
   <div class="card">
     <div class="card-label">Peau — Routine quotidienne</div>
-    <div class="recup-item"><div class="recup-icon">🌅</div><div><div class="recup-title">Matin — 3 étapes</div><div class="recup-text"><strong style="color:var(--text);">1. Nettoyant doux</strong> — CeraVe, La Roche-Posay<br><strong style="color:var(--text);">2. Sérum Vitamine C</strong> — éclat + protection UV<br><strong style="color:var(--text);">3. SPF 50</strong> — non négociable en PACA</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🌙</div><div><div class="recup-title">Soir — 3 étapes</div><div class="recup-text"><strong style="color:var(--text);">1. Double nettoyage</strong> si sport — huile puis gel<br><strong style="color:var(--text);">2. Rétinol</strong> 2-3x/semaine — The Ordinary 0.025%<br><strong style="color:var(--text);">3. Crème hydratante</strong> — CeraVe</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🌅</div><div><div class="recup-title">Matin</div><div class="recup-text"><strong style="color:var(--text);">1. Nettoyant doux</strong><br><strong style="color:var(--text);">2. Sérum Vitamine C</strong><br><strong style="color:var(--text);">3. SPF 50</strong> — non négociable en PACA</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🌙</div><div><div class="recup-title">Soir</div><div class="recup-text"><strong style="color:var(--text);">1. Double nettoyage</strong> si sport<br><strong style="color:var(--text);">2. Rétinol</strong> 2-3x/semaine<br><strong style="color:var(--text);">3. Crème hydratante</strong></div></div></div>
   </div>
   <div class="card">
     <div class="card-label">Nutrition — Règles simples</div>
-    <div class="recup-item"><div class="recup-icon">🥩</div><div><div class="recup-title">150g de protéines par jour</div><div class="recup-text">Poulet · Œufs · Thon · Saumon · Fromage blanc. À chaque repas.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🍚</div><div><div class="recup-title">Glucides selon l'effort</div><div class="recup-text">Jour de sport intense → glucides · Jour de repos → protéines + légumes.</div></div></div>
-    <div class="recup-item"><div class="recup-icon">💊</div><div><div class="recup-title">Compléments</div><div class="recup-text"><strong style="color:var(--text);">Magnésium bisglycinate</strong> — soir · Sommeil + récup<br><strong style="color:var(--text);">Vitamine D3</strong> — automne/hiver<br><strong style="color:var(--text);">Whey</strong> — si t'arrives pas à 150g/j</div></div></div>
-    <div class="recup-item"><div class="recup-icon">🍕</div><div><div class="recup-title">Pizza, resto, famille</div><div class="recup-text">Aucune restriction. T'as le volume d'activité pour l'absorber.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🥩</div><div><div class="recup-title">150g de protéines/jour</div><div class="recup-text">Poulet · Œufs · Thon · Saumon · Fromage blanc.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🍚</div><div><div class="recup-title">Glucides selon l'effort</div><div class="recup-text">Sport intense → glucides · Repos → protéines + légumes.</div></div></div>
+    <div class="recup-item"><div class="recup-icon">💊</div><div><div class="recup-title">Compléments</div><div class="recup-text"><strong style="color:var(--text);">Magnésium</strong> soir · <strong style="color:var(--text);">D3</strong> hiver · <strong style="color:var(--text);">Whey</strong> si besoin</div></div></div>
+    <div class="recup-item"><div class="recup-icon">🍕</div><div><div class="recup-title">Pizza, resto, famille</div><div class="recup-text">Aucune restriction.</div></div></div>
   </div>
 </div>
 
 <!-- ========== PAGE: HISTORIQUE ========== -->
 <div id="page-histo" class="page">
   <div class="page-header">
-    <div class="page-title">HISTO <span>& PROGRÈS</span></div>
-    <div class="page-sub">Suivi semaine par semaine</div>
+    <div>
+      <div class="page-title">HISTO <span>& PROGRÈS</span></div>
+      <div class="page-sub">Suivi semaine par semaine</div>
+    </div>
   </div>
   <div id="histo-content">
     <div class="empty-state"><div class="e-icon">📊</div><div>Pas encore de données.<br>Log ta première journée pour commencer.</div></div>
@@ -453,80 +570,89 @@ textarea.form-input { resize: none; height: 70px; }
 </nav>
 
 <script>
+// ============================================================
+// STATE
+// ============================================================
 let selectedScore = null;
 let selectedFeeling = null;
 let selectedSession = null;
-let whoopImageBase64 = null;
-let nikeImageBase64 = null;
-let journalData = JSON.parse(localStorage.getItem('youri-journal') || '[]');
+let images = { whoop: null, whoopSleep: null, nike: null };
+let runPlanVisible = false;
 
-const seanceParJour = {
-  1: { label: 'Pec · Épaules · Triceps', charges: [
-    { id: 'bench', name: 'Développé couché barre', unit: 'kg', placeholder: '60' },
-    { id: 'dips', name: 'Dips', unit: 'rép', placeholder: '10' },
-    { id: 'militaire', name: 'Développé militaire', unit: 'kg', placeholder: '8' },
-    { id: 'laterales', name: 'Élévations latérales', unit: 'kg', placeholder: '6' },
-    { id: 'ecarte', name: 'Écarté haltères', unit: 'kg', placeholder: '8' },
-    { id: 'oiseau', name: 'Élévations arrière (oiseau)', unit: 'kg', placeholder: '4' },
-  ]},
-  3: { label: 'Dos · Biceps · Abdos', charges: [
-    { id: 'tractions-large', name: 'Tractions prise large', unit: 'rép', placeholder: '8' },
-    { id: 'tractions-serree', name: 'Tractions prise serrée', unit: 'rép', placeholder: '6' },
-    { id: 'rowing-barre', name: 'Rowing barre', unit: 'kg', placeholder: '50' },
-    { id: 'rowing-haltere', name: 'Rowing haltère uni.', unit: 'kg', placeholder: '20' },
-    { id: 'curl-barre', name: 'Curl barre', unit: 'kg', placeholder: '25' },
-    { id: 'curl-marteau', name: 'Curl marteau', unit: 'kg', placeholder: '12' },
-  ]},
-  5: { label: 'Full Haut · Supersets', charges: [
-    { id: 'dev-halteres', name: 'Développé haltères', unit: 'kg', placeholder: '16' },
-    { id: 'tractions-ven', name: 'Tractions', unit: 'rép', placeholder: '8' },
-    { id: 'militaire-ven', name: 'Développé militaire', unit: 'kg', placeholder: '8' },
-    { id: 'rowing-ven', name: 'Rowing haltère', unit: 'kg', placeholder: '20' },
-    { id: 'laterales-ven', name: 'Élévations latérales', unit: 'kg', placeholder: '6' },
-    { id: 'curl-ven', name: 'Curl haltères', unit: 'kg', placeholder: '12' },
-  ]}
-};
+// journalData = array of DAY entries (one per calendar day), each with:
+// { date, dateKey, whoop: {score,sleep,hrv,imgFlags}, sessions: [ {type, ..., aiNote} ], dayAiSummary, scoreColor }
+let journalData = JSON.parse(localStorage.getItem('youri-journal-v2') || '[]');
 
 const days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 const now = new Date();
 const todayNum = now.getDay();
+const todayKey = now.toISOString().slice(0,10);
+
 document.getElementById('today-date').textContent = days[todayNum] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
 
-// ---- API KEY ----
+// ============================================================
+// EXERCISES PER DAY (with series tracking)
+// ============================================================
+const seanceParJour = {
+  1: { label: 'Pec · Épaules · Triceps', exos: [
+    { id: 'bench', name: 'Développé couché barre', unit: 'kg' },
+    { id: 'dips', name: 'Dips', unit: 'rép' },
+    { id: 'militaire', name: 'Développé militaire', unit: 'kg' },
+    { id: 'laterales', name: 'Élévations latérales', unit: 'kg' },
+    { id: 'ecarte', name: 'Écarté haltères', unit: 'kg' },
+    { id: 'oiseau', name: 'Élévations arrière (oiseau)', unit: 'kg' },
+  ]},
+  3: { label: 'Dos · Biceps · Abdos', exos: [
+    { id: 'tractions-large', name: 'Tractions prise large', unit: 'rép' },
+    { id: 'tractions-serree', name: 'Tractions prise serrée', unit: 'rép' },
+    { id: 'rowing-barre', name: 'Rowing barre', unit: 'kg' },
+    { id: 'rowing-haltere', name: 'Rowing haltère uni.', unit: 'kg' },
+    { id: 'curl-barre', name: 'Curl barre', unit: 'kg' },
+    { id: 'curl-marteau', name: 'Curl marteau', unit: 'kg' },
+  ]},
+  5: { label: 'Full Haut · Supersets', exos: [
+    { id: 'dev-halteres', name: 'Développé haltères', unit: 'kg' },
+    { id: 'tractions-ven', name: 'Tractions', unit: 'rép' },
+    { id: 'militaire-ven', name: 'Développé militaire', unit: 'kg' },
+    { id: 'rowing-ven', name: 'Rowing haltère', unit: 'kg' },
+    { id: 'laterales-ven', name: 'Élévations latérales', unit: 'kg' },
+    { id: 'curl-ven', name: 'Curl haltères', unit: 'kg' },
+  ]}
+};
+
+// ============================================================
+// API KEY
+// ============================================================
 function checkApiKey() {
   const key = localStorage.getItem('youri-api-key');
   if (!key) showSetup();
 }
-
 function showSetup() {
   const screen = document.getElementById('setup-screen');
   screen.style.display = 'flex';
   const existing = localStorage.getItem('youri-api-key');
   if (existing) document.getElementById('api-key-input').value = existing;
 }
-
 function saveApiKey() {
   const key = document.getElementById('api-key-input').value.trim();
-  if (!key || !key.startsWith('sk-ant-')) {
-    alert('Clé invalide — elle doit commencer par sk-ant-');
-    return;
-  }
+  if (!key || !key.startsWith('sk-ant-')) { alert('Clé invalide — elle doit commencer par sk-ant-'); return; }
   localStorage.setItem('youri-api-key', key);
   document.getElementById('setup-screen').style.display = 'none';
 }
+function getApiKey() { return localStorage.getItem('youri-api-key'); }
 
-function getApiKey() {
-  return localStorage.getItem('youri-api-key');
-}
-
-// ---- NAV ----
+// ============================================================
+// NAV
+// ============================================================
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   btn.classList.add('active');
   if (id === 'histo') renderHistory();
+  if (id === 'journal') renderJournalState();
+  if (id === 'prog') updateGoalBar();
 }
 
 function selectDay(day, el) {
@@ -536,12 +662,170 @@ function selectDay(day, el) {
   document.getElementById('detail-' + day).classList.add('active');
 }
 
+function toggleRunPlan() {
+  runPlanVisible = !runPlanVisible;
+  document.getElementById('run-plan-block').classList.toggle('visible', runPlanVisible);
+}
+
+// ============================================================
+// TODAY'S DAY ENTRY HELPERS
+// ============================================================
+function getTodayEntry() {
+  return journalData.find(d => d.dateKey === todayKey);
+}
+function ensureTodayEntry() {
+  let entry = getTodayEntry();
+  if (!entry) {
+    entry = { date: now.toLocaleDateString('fr-FR'), dateKey: todayKey, whoop: null, sessions: [], dayAiSummary: null, scoreColor: 'grey' };
+    journalData.push(entry);
+  }
+  return entry;
+}
+function saveJournal() { localStorage.setItem('youri-journal-v2', JSON.stringify(journalData)); }
+
+// ============================================================
+// RENDER JOURNAL PAGE STATE (called on load + after each save)
+// ============================================================
+function renderJournalState() {
+  const entry = getTodayEntry();
+  const listEl = document.getElementById('today-sessions-list');
+  const addBtn = document.getElementById('add-session-btn');
+  const morningCard = document.getElementById('whoop-morning-card');
+
+  listEl.innerHTML = '';
+
+  if (entry && entry.whoop) {
+    morningCard.style.display = 'none';
+    addBtn.style.display = 'block';
+
+    const scoreIcons = { green: '🟢', yellow: '🟡', red: '🔴' };
+    const chip = document.createElement('div');
+    chip.className = 'today-session-chip';
+    chip.innerHTML = `<span class="tsc-icon">⌚</span><span class="tsc-label">Whoop ${entry.whoop.score ? scoreIcons[entry.whoop.score] || '' : '📷'} ${entry.whoop.sleep ? '· ' + entry.whoop.sleep + 'h sommeil' : ''}</span>`;
+    listEl.appendChild(chip);
+  } else {
+    morningCard.style.display = 'block';
+    addBtn.style.display = 'none';
+  }
+
+  if (entry && entry.sessions && entry.sessions.length) {
+    const sportIcons = { muscu: '💪', course: '🏃', velo: '🚴', yoga: '🧘', autre: '⚡' };
+    entry.sessions.forEach(s => {
+      const chip = document.createElement('div');
+      chip.className = 'today-session-chip';
+      let label = s.type === 'autre' ? (s.autreNom || 'Sport') : s.type.charAt(0).toUpperCase() + s.type.slice(1);
+      chip.innerHTML = `<span class="tsc-icon">${sportIcons[s.type] || '⚡'}</span><span class="tsc-label">${label} — ${s.feeling || 'logué'}</span>`;
+      listEl.appendChild(chip);
+    });
+  }
+}
+
+// ============================================================
+// MORNING WHOOP LOGGING
+// ============================================================
+async function logMorning() {
+  if (!selectedScore && !images.whoop) { alert('Indique ton score Whoop (photo ou sélection)'); return; }
+
+  const btn = document.getElementById('morning-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+
+  const sleep = document.getElementById('j-sleep').value;
+  const hrv = document.getElementById('j-hrv').value;
+  const apiKey = getApiKey();
+
+  const entry = ensureTodayEntry();
+  entry.whoop = {
+    score: selectedScore,
+    sleep: sleep || null,
+    hrv: hrv || null,
+    hasWhoopImg: !!images.whoop,
+    hasSleepImg: !!images.whoopSleep
+  };
+
+  // If images provided, ask AI to extract score/sleep values for storage (best effort)
+  if (images.whoop && apiKey) {
+    try {
+      const contentParts = [];
+      contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.whoop } });
+      if (images.whoopSleep) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.whoopSleep } });
+      contentParts.push({ type: 'text', text: 'Regarde cette image Whoop. Réponds UNIQUEMENT en JSON strict, sans aucun texte autour, format exact: {"score_color":"green|yellow|red","score_percent":number,"sleep_hours":number,"hrv":number}. Si une info est absente, mets null.' });
+
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 300, messages: [{ role: 'user', content: contentParts }] })
+      });
+      const data = await response.json();
+      const text = data.content?.[0]?.text || '';
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        if (parsed.score_color) entry.whoop.score = parsed.score_color;
+        if (parsed.sleep_hours) entry.whoop.sleep = parsed.sleep_hours;
+        if (parsed.hrv) entry.whoop.hrv = parsed.hrv;
+        entry.whoop.percent = parsed.score_percent || null;
+      }
+    } catch(e) { console.error('Extraction Whoop échouée', e); }
+  }
+
+  entry.scoreColor = entry.whoop.score || 'grey';
+  saveJournal();
+
+  // reset morning form
+  selectedScore = null;
+  images.whoop = null;
+  images.whoopSleep = null;
+  document.getElementById('j-sleep').value = '';
+  document.getElementById('j-hrv').value = '';
+  document.querySelectorAll('.score-opt').forEach(o => o.classList.remove('selected-green','selected-yellow','selected-red'));
+  document.getElementById('whoop-preview').classList.remove('visible');
+  document.getElementById('whoop-sleep-preview').classList.remove('visible');
+  document.getElementById('whoop-zone').classList.remove('has-image');
+  document.getElementById('whoop-sleep-zone').classList.remove('has-image');
+
+  btn.disabled = false;
+  btn.textContent = 'Enregistrer le matin';
+
+  renderJournalState();
+}
+
+// ============================================================
+// SESSION FORM
+// ============================================================
+function openSessionForm() {
+  document.getElementById('session-form-card').style.display = 'block';
+  document.getElementById('add-session-btn').style.display = 'none';
+}
+function closeSessionForm() {
+  document.getElementById('session-form-card').style.display = 'none';
+  document.getElementById('add-session-btn').style.display = 'block';
+  resetSessionForm();
+}
+function resetSessionForm() {
+  selectedSession = null;
+  selectedFeeling = null;
+  images.nike = null;
+  document.querySelectorAll('.session-btn').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('.feeling-btn').forEach(b => b.classList.remove('sel'));
+  ['muscu-fields','course-fields','velo-fields','autre-fields','modif-section'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('modif-fields').style.display = 'none';
+  document.getElementById('j-note').value = '';
+  document.getElementById('j-km').value = '';
+  document.getElementById('j-pace').value = '';
+  document.getElementById('j-fc').value = '';
+  document.getElementById('j-velo-duree').value = '';
+  document.getElementById('j-velo-km').value = '';
+  document.getElementById('j-velo-fc').value = '';
+  document.getElementById('j-autre-nom').value = '';
+  document.getElementById('j-autre-duree').value = '';
+}
+
 function selectScore(color, el) {
   document.querySelectorAll('.score-opt').forEach(o => o.classList.remove('selected-green','selected-yellow','selected-red'));
   el.classList.add('selected-' + color);
   selectedScore = color;
 }
-
 function selectFeeling(val, el) {
   document.querySelectorAll('.feeling-btn').forEach(b => b.classList.remove('sel'));
   el.classList.add('sel');
@@ -552,30 +836,14 @@ function selectSession(type, el) {
   document.querySelectorAll('.session-btn').forEach(b => b.classList.remove('sel'));
   el.classList.add('sel');
   selectedSession = type;
-  document.getElementById('muscu-fields').style.display = 'none';
-  document.getElementById('course-fields').style.display = 'none';
-  document.getElementById('modif-section').style.display = 'block';
-  if (type === 'muscu') { document.getElementById('muscu-fields').style.display = 'block'; renderMuscuFields(); }
-  else if (type === 'course') { document.getElementById('course-fields').style.display = 'block'; }
-}
 
-function renderMuscuFields() {
-  const seance = seanceParJour[todayNum];
-  const label = document.getElementById('muscu-day-label');
-  const list = document.getElementById('muscu-charges-list');
-  if (!seance) {
-    label.textContent = 'Séance libre';
-    list.innerHTML = '<p style="color:var(--muted);font-size:12px;padding:8px 0;">Pas de séance muscu prévue aujourd\'hui.</p>';
-    return;
-  }
-  label.textContent = seance.label;
-  list.innerHTML = seance.charges.map(c => `
-    <div class="charge-item">
-      <div class="charge-name">${c.name}</div>
-      <input type="number" class="charge-input" id="c-${c.id}" placeholder="${c.placeholder}">
-      <div class="charge-unit">${c.unit}</div>
-    </div>
-  `).join('');
+  ['muscu-fields','course-fields','velo-fields','autre-fields'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('modif-section').style.display = 'block';
+
+  if (type === 'muscu') { document.getElementById('muscu-fields').style.display = 'block'; renderMuscuExoList(); }
+  else if (type === 'course') document.getElementById('course-fields').style.display = 'block';
+  else if (type === 'velo') document.getElementById('velo-fields').style.display = 'block';
+  else if (type === 'autre') document.getElementById('autre-fields').style.display = 'block';
 }
 
 function toggleModif(btn) {
@@ -585,46 +853,126 @@ function toggleModif(btn) {
   btn.classList.toggle('sel', !visible);
 }
 
-function handleWhoopUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    whoopImageBase64 = e.target.result.split(',')[1];
-    const preview = document.getElementById('whoop-preview');
-    preview.src = e.target.result;
-    preview.classList.add('visible');
-    document.getElementById('whoop-zone').classList.add('has-image');
-  };
-  reader.readAsDataURL(file);
+// ============================================================
+// MUSCU - DYNAMIC SERIES PER EXERCISE
+// ============================================================
+function getLastChargeFor(exoId) {
+  // search journalData backwards for last logged value of this exercise
+  for (let i = journalData.length - 1; i >= 0; i--) {
+    const d = journalData[i];
+    if (!d.sessions) continue;
+    for (let j = d.sessions.length - 1; j >= 0; j--) {
+      const s = d.sessions[j];
+      if (s.type === 'muscu' && s.exercises) {
+        const ex = s.exercises.find(e => e.id === exoId);
+        if (ex && ex.series && ex.series.length) {
+          return ex.series.map(se => se.weight + (se.weight ? 'x' + se.reps : se.reps)).join(' · ');
+        }
+      }
+    }
+  }
+  return null;
 }
 
-function handleNikeUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    nikeImageBase64 = e.target.result.split(',')[1];
-    const preview = document.getElementById('nike-preview');
-    preview.src = e.target.result;
-    preview.classList.add('visible');
-    document.getElementById('nike-zone').classList.add('has-image');
-  };
-  reader.readAsDataURL(file);
-}
-
-function collectCharges() {
+function renderMuscuExoList() {
   const seance = seanceParJour[todayNum];
-  if (!seance) return '';
-  return seance.charges.map(c => {
-    const el = document.getElementById('c-' + c.id);
-    const val = el ? el.value : '';
-    return val ? `${c.name}: ${val}${c.unit}` : null;
-  }).filter(Boolean).join(' · ');
+  const label = document.getElementById('muscu-day-label');
+  const list = document.getElementById('muscu-exo-list');
+  list.innerHTML = '';
+
+  if (!seance) {
+    label.textContent = 'Séance libre';
+    list.innerHTML = '<p style="color:var(--muted);font-size:12px;padding:8px 0;">Pas de séance type prévue — note ce que tu fais dans la note.</p>';
+    return;
+  }
+  label.textContent = seance.label;
+
+  seance.exos.forEach(exo => {
+    const block = document.createElement('div');
+    block.className = 'exo-block';
+    block.dataset.exoId = exo.id;
+    block.dataset.unit = exo.unit;
+
+    const lastVal = getLastChargeFor(exo.id);
+
+    block.innerHTML = `
+      <div class="exo-block-name">${exo.name}</div>
+      <div class="exo-block-last">${lastVal ? 'Dernière fois : <b>' + lastVal + '</b>' : 'Pas encore de données'}</div>
+      <div class="series-container"></div>
+      <button type="button" class="add-serie-btn" onclick="addSerieRow(this)">+ Ajouter une série</button>
+    `;
+    list.appendChild(block);
+    // start with 1 series row by default
+    addSerieRow(block.querySelector('.add-serie-btn'));
+  });
 }
 
-async function analyzeDay() {
-  if (!selectedScore && !whoopImageBase64) { alert('Indique ton score Whoop'); return; }
+function addSerieRow(btn) {
+  const block = btn.closest('.exo-block');
+  const container = block.querySelector('.series-container');
+  const unit = block.dataset.unit;
+  const serieNum = container.children.length + 1;
+
+  const row = document.createElement('div');
+  row.className = 'serie-row';
+  row.innerHTML = `
+    <div class="serie-label">S${serieNum}</div>
+    <input type="number" class="serie-input serie-weight" placeholder="${unit === 'kg' ? 'kg' : ''}">
+    <div class="serie-x">×</div>
+    <input type="number" class="serie-input serie-reps" placeholder="rép">
+  `;
+  container.appendChild(row);
+}
+
+function collectMuscuData() {
+  const blocks = document.querySelectorAll('#muscu-exo-list .exo-block');
+  const exercises = [];
+  blocks.forEach(block => {
+    const exoId = block.dataset.exoId;
+    const name = block.querySelector('.exo-block-name').textContent;
+    const rows = block.querySelectorAll('.serie-row');
+    const series = [];
+    rows.forEach(row => {
+      const weight = row.querySelector('.serie-weight').value;
+      const reps = row.querySelector('.serie-reps').value;
+      if (weight || reps) series.push({ weight: weight || null, reps: reps || null });
+    });
+    if (series.length) exercises.push({ id: exoId, name, series });
+  });
+  return exercises;
+}
+
+function formatMuscuSummary(exercises) {
+  return exercises.map(e => {
+    const seriesStr = e.series.map(s => `${s.weight || '?'}${s.weight ? 'kg' : ''}x${s.reps || '?'}`).join(', ');
+    return `${e.name}: ${seriesStr}`;
+  }).join(' · ');
+}
+
+// ============================================================
+// IMAGE UPLOAD
+// ============================================================
+function handleImgUpload(event, key) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    images[key] = e.target.result.split(',')[1];
+    const previewMap = { whoop: 'whoop-preview', whoopSleep: 'whoop-sleep-preview', nike: 'nike-preview' };
+    const zoneMap = { whoop: 'whoop-zone', whoopSleep: 'whoop-sleep-zone', nike: 'nike-zone' };
+    const preview = document.getElementById(previewMap[key]);
+    preview.src = e.target.result;
+    preview.classList.add('visible');
+    document.getElementById(zoneMap[key]).classList.add('has-image');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============================================================
+// ANALYZE SESSION (appends to today's entry)
+// ============================================================
+async function analyzeSession() {
+  if (!selectedSession) { alert('Choisis un type de séance'); return; }
   const apiKey = getApiKey();
   if (!apiKey) { showSetup(); return; }
 
@@ -634,75 +982,116 @@ async function analyzeDay() {
   btn.disabled = true;
   btn.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
 
-  const sleep = document.getElementById('j-sleep').value;
-  const hrv = document.getElementById('j-hrv').value;
-  const km = document.getElementById('j-km').value;
-  const pace = document.getElementById('j-pace').value;
-  const fc = document.getElementById('j-fc').value;
   const note = document.getElementById('j-note').value;
   const modifRaison = document.getElementById('modif-raison')?.value;
   const modifNote = document.getElementById('modif-note')?.value;
-  const charges = collectCharges();
-  const scoreMap = { green: 'VERT (67-100%)', yellow: 'JAUNE (34-66%)', red: 'ROUGE (0-33%)' };
 
+  const sessionData = { type: selectedSession, feeling: selectedFeeling || null, modif: modifRaison || null, modifNote: modifNote || null, note: note || null };
+
+  let contentParts = [];
+  let sessionDescription = '';
+
+  if (selectedSession === 'muscu') {
+    const exercises = collectMuscuData();
+    sessionData.exercises = exercises;
+    sessionDescription = `Muscu (${seanceParJour[todayNum]?.label || 'libre'}) — ${formatMuscuSummary(exercises)}`;
+  } else if (selectedSession === 'course') {
+    const km = document.getElementById('j-km').value;
+    const pace = document.getElementById('j-pace').value;
+    const fc = document.getElementById('j-fc').value;
+    sessionData.km = km || null;
+    sessionData.pace = pace || null;
+    sessionData.fc = fc || null;
+    sessionData.hasImg = !!images.nike;
+    if (images.nike) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.nike } });
+    sessionDescription = images.nike ? 'Course — image Nike Run Club jointe' : `Course — ${km||'?'}km à ${pace||'?'}/km, FC ${fc||'?'}bpm`;
+  } else if (selectedSession === 'velo') {
+    const duree = document.getElementById('j-velo-duree').value;
+    const km = document.getElementById('j-velo-km').value;
+    const fc = document.getElementById('j-velo-fc').value;
+    sessionData.duree = duree || null;
+    sessionData.km = km || null;
+    sessionData.fc = fc || null;
+    sessionDescription = `Vélo — ${duree||'?'}min, ${km||'?'}km, FC ${fc||'?'}bpm`;
+  } else if (selectedSession === 'autre') {
+    const nom = document.getElementById('j-autre-nom').value;
+    const duree = document.getElementById('j-autre-duree').value;
+    const intensite = document.getElementById('j-autre-intensite').value;
+    sessionData.autreNom = nom || 'Sport';
+    sessionData.duree = duree || null;
+    sessionData.intensite = intensite;
+    sessionDescription = `${nom || 'Sport'} — ${duree||'?'}min, intensité ${intensite}`;
+  } else if (selectedSession === 'yoga') {
+    sessionDescription = 'Yoga / Mobilité';
+  }
+
+  const entry = ensureTodayEntry();
+  const scoreMap = { green: 'VERT (67-100%)', yellow: 'JAUNE (34-66%)', red: 'ROUGE (0-33%)' };
   const seanceNom = {1:'Pec/Épaules/Triceps',2:'Course travaillée',3:'Dos/Biceps/Abdos',4:'Yoga/Mobilité+Bas du corps',5:'Full Haut Supersets',6:'Sortie longue',0:'Repos'}[todayNum];
 
-  let dataStr = `PROFIL : Youri, 33 ans, 1m83, 79kg, DG entreprise peinture, stress élevé. Objectifs : haut du corps style CR7, 10km < 50 min, bien vieillir. Côte fêlée en guérison (semaine 2/4-6).
+  let dataStr = `PROFIL : Youri, 33 ans, 1m83, 79kg, DG entreprise peinture, stress élevé. Objectifs : haut du corps style CR7, 10km < 50 min, bien vieillir. Côte fêlée en guérison (vérifie le contexte récent).
 
-DONNÉES DU JOUR (${days[todayNum]} ${now.getDate()} ${months[now.getMonth()]}) :
-- Score Whoop : ${whoopImageBase64 ? 'image uploadée — lis les données' : scoreMap[selectedScore]}
-- Sommeil : ${sleep ? sleep + 'h' : 'non renseigné'}${hrv ? ' · HRV : ' + hrv : ''}
-- Séance prévue : ${seanceNom}
-- Séance effectuée : ${selectedSession || 'non renseignée'}
-- Ressenti : ${selectedFeeling || 'non renseigné'}`;
+JOURNÉE DU ${days[todayNum]} ${now.getDate()} ${months[now.getMonth()]} :
+- Séance prévue au programme : ${seanceNom}`;
 
-  if (charges) dataStr += `\n- Charges : ${charges}`;
-  if (selectedSession === 'course') {
-    if (nikeImageBase64) dataStr += `\n- Course : image Nike Run Club uploadée`;
-    else dataStr += `\n- Course : ${km||'?'}km · Allure ${pace||'?'}/km · FC ${fc||'?'}bpm`;
+  if (entry.whoop) {
+    dataStr += `\n- Whoop ce matin : ${entry.whoop.score ? scoreMap[entry.whoop.score] : 'non renseigné'}${entry.whoop.sleep ? ' · Sommeil ' + entry.whoop.sleep + 'h' : ''}${entry.whoop.hrv ? ' · HRV ' + entry.whoop.hrv : ''}`;
   }
+
+  if (entry.sessions.length > 0) {
+    dataStr += `\n\nSÉANCES DÉJÀ LOGUÉES AUJOURD'HUI :`;
+    entry.sessions.forEach((s, i) => { dataStr += `\n${i+1}) ${s.type}${s.feeling ? ' · ' + s.feeling : ''}`; });
+  }
+
+  dataStr += `\n\nNOUVELLE SÉANCE À ANALYSER :\n- ${sessionDescription}`;
+  if (sessionData.feeling) dataStr += `\n- Ressenti : ${sessionData.feeling}`;
   if (modifRaison) dataStr += `\n- Modification : ${modifRaison}${modifNote ? ' — ' + modifNote : ''}`;
   if (note) dataStr += `\n- Note : ${note}`;
 
-  if (journalData.length > 0) {
-    const last3 = journalData.slice(-3);
-    dataStr += '\n\nDERNIÈRES SÉANCES :';
-    last3.forEach(d => { dataStr += `\n- ${d.date} : Whoop ${d.score} · Sommeil ${d.sleep}h · ${d.session}${d.feeling ? ' · ' + d.feeling : ''}`; });
+  if (journalData.length > 1) {
+    const recent = journalData.slice(-4, -1);
+    if (recent.length) {
+      dataStr += '\n\nJOURS PRÉCÉDENTS (contexte / tendance) :';
+      recent.forEach(d => {
+        const sessSummary = d.sessions.map(s => s.type).join('+') || 'repos';
+        dataStr += `\n- ${d.date} : Whoop ${d.whoop?.score || '?'} · Sommeil ${d.whoop?.sleep || '?'}h · ${sessSummary}`;
+      });
+    }
   }
 
-  const prompt = `Tu es le coach sportif et santé de Youri. Tu le tutoies. Direct, dense, sans blabla. Max 6 lignes.
+  const prompt = `Tu es le coach sportif et santé de Youri. Tutoiement. Direct, dense, sans blabla. MAXIMUM 4 lignes, pas plus — c'est une consigne stricte.
 
-Analyse et donne-lui :
-1) Évaluation récupération du jour
-2) Conseil concret pour demain ou la prochaine séance
-3) Si charges renseignées : peut-il progresser ?
-4) Si séance modifiée : valide ou recadre la décision
+Structure ta réponse ainsi :
+1. Une phrase d'évaluation globale de la journée (en tenant compte de TOUTES les séances déjà loguées + celle-ci + le Whoop)
+2. Un conseil concret unique et actionnable (le plus important, pas une liste)
+3. Si charges renseignées : dis en une phrase s'il progresse ou stagne, rien de plus
 
 ${dataStr}`;
+
+  contentParts.push({ type: 'text', text: prompt });
 
   try {
     aiBox.classList.add('visible');
     aiText.textContent = '';
 
-    const contentParts = [];
-    if (whoopImageBase64) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: whoopImageBase64 } });
-    if (nikeImageBase64) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: nikeImageBase64 } });
-    contentParts.push({ type: 'text', text: prompt });
-
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, messages: [{ role: 'user', content: contentParts }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, messages: [{ role: 'user', content: contentParts }] })
     });
 
     const data = await response.json();
-    if (data.error) { aiText.textContent = 'Erreur API : ' + data.error.message; btn.disabled = false; btn.textContent = 'Analyser ma journée'; return; }
+    if (data.error) { aiText.textContent = 'Erreur API : ' + data.error.message; btn.disabled = false; btn.textContent = 'Analyser cette séance'; return; }
     const text = data.content?.[0]?.text || 'Erreur de réponse.';
     aiText.textContent = text;
 
-    const entry = { date: now.toLocaleDateString('fr-FR'), score: selectedScore || 'image', sleep: sleep || '?', hrv: hrv || null, session: selectedSession || 'repos', feeling: selectedFeeling || null, km: km || null, pace: pace || null, charges: charges || null, modif: modifRaison || null, note: note || null, aiResponse: text };
-    journalData.push(entry);
-    localStorage.setItem('youri-journal', JSON.stringify(journalData));
+    sessionData.aiNote = text;
+    entry.sessions.push(sessionData);
+
+    // update overall day score color from whoop if present
+    if (entry.whoop && entry.whoop.score) entry.scoreColor = entry.whoop.score;
+
+    saveJournal();
 
   } catch(e) {
     aiText.textContent = 'Erreur de connexion. Vérifie ta connexion internet.';
@@ -710,7 +1099,46 @@ ${dataStr}`;
   }
 
   btn.disabled = false;
-  btn.textContent = 'Analyser ma journée';
+  btn.textContent = 'Analyser cette séance';
+
+  setTimeout(() => { closeSessionForm(); renderJournalState(); }, 50);
+}
+
+// ============================================================
+// GOAL PROGRESS BAR (10km objective)
+// ============================================================
+function updateGoalBar() {
+  let bestPaceSec = null;
+  journalData.forEach(d => {
+    d.sessions.forEach(s => {
+      if (s.type === 'course' && s.pace) {
+        const m = s.pace.match(/(\d+)'(\d+)/);
+        if (m) {
+          const sec = parseInt(m[1]) * 60 + parseInt(m[2]);
+          if (bestPaceSec === null || sec < bestPaceSec) bestPaceSec = sec;
+        }
+      }
+    });
+  });
+  const targetSec = 5 * 60; // 5'00/km target ~ 50min/10km
+  const startSec = 5 * 60 + 30; // 5'30/km baseline
+  let progress = 25; // baseline week 3-4
+  if (bestPaceSec !== null) {
+    progress = Math.min(100, Math.max(10, Math.round(((startSec - bestPaceSec) / (startSec - targetSec)) * 100)));
+  }
+  document.getElementById('goal-fill').style.width = progress + '%';
+  document.getElementById('goal-best-pace').textContent = bestPaceSec ? Math.floor(bestPaceSec/60) + "'" + String(bestPaceSec%60).padStart(2,'0') + '/km' : '—';
+}
+
+// ============================================================
+// HISTORY RENDERING — new card design
+// ============================================================
+function toggleHistoryDetail(idx) {
+  const el = document.getElementById('hist-detail-' + idx);
+  const arrow = document.getElementById('hist-arrow-' + idx);
+  const open = el.classList.contains('open');
+  el.classList.toggle('open', !open);
+  arrow.textContent = open ? '▾' : '▴';
 }
 
 function renderHistory() {
@@ -719,26 +1147,58 @@ function renderHistory() {
     container.innerHTML = '<div class="empty-state"><div class="e-icon">📊</div><div>Pas encore de données.<br>Log ta première journée pour commencer.</div></div>';
     return;
   }
-  const scoreLabels = { green: '🟢', yellow: '🟡', red: '🔴', image: '⌚' };
+
+  const circleClass = { green: 'circle-green', yellow: 'circle-yellow', red: 'circle-red', grey: 'circle-grey' };
+  const scoreEmoji = { green: '🟢', yellow: '🟡', red: '🔴', grey: '–' };
+  const sportIcons = { muscu: '💪', course: '🏃', velo: '🚴', yoga: '🧘', autre: '⚡' };
+
   let html = '';
-  [...journalData].reverse().forEach(d => {
+  [...journalData].reverse().forEach((d, idx) => {
+    const sessTypes = d.sessions.map(s => sportIcons[s.type] || '⚡').join(' ');
+    const hasModif = d.sessions.some(s => s.modif);
+    const summary = d.sessions.length
+      ? d.sessions.map(s => s.type === 'autre' ? (s.autreNom||'Sport') : s.type).join(' + ')
+      : (d.whoop ? 'Whoop loggé' : 'Journée');
+
     html += `<div class="history-item">
-      <div class="history-date">${d.date} — ${scoreLabels[d.score] || ''} ${d.feeling || ''} ${d.modif ? '⚠️ ' + d.modif : ''}</div>
-      <div class="history-stats">
-        <div class="h-stat"><div class="h-stat-val">${d.sleep}h</div><div class="h-stat-lbl">Sommeil</div></div>
-        ${d.hrv ? `<div class="h-stat"><div class="h-stat-val">${d.hrv}</div><div class="h-stat-lbl">HRV</div></div>` : ''}
-        ${d.km ? `<div class="h-stat"><div class="h-stat-val">${d.km}km</div><div class="h-stat-lbl">Course</div></div>` : ''}
-        ${d.pace ? `<div class="h-stat"><div class="h-stat-val">${d.pace}</div><div class="h-stat-lbl">Allure</div></div>` : ''}
+      <div class="history-head" onclick="toggleHistoryDetail(${idx})" style="cursor:pointer;">
+        <div class="history-score-circle ${circleClass[d.scoreColor] || 'circle-grey'}">${scoreEmoji[d.scoreColor] || '–'}</div>
+        <div class="history-head-text">
+          <div class="history-date">${d.date}</div>
+          <div class="history-summary">${summary} ${sessTypes}</div>
+          <div class="history-badges">
+            ${hasModif ? '<span class="history-badge hb-warn">⚠️ Modifiée</span>' : ''}
+            ${d.whoop && d.whoop.sleep ? '<span class="history-badge hb-info">' + d.whoop.sleep + 'h sommeil</span>' : ''}
+          </div>
+        </div>
+        <div class="history-toggle" id="hist-arrow-${idx}">▾</div>
       </div>
-      ${d.charges ? `<div style="margin-top:8px;font-size:11px;color:var(--accent);">${d.charges}</div>` : ''}
-      ${d.aiResponse ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.5;">${d.aiResponse}</div>` : ''}
+      <div class="history-detail" id="hist-detail-${idx}">
+        <div class="history-stats">
+          ${d.whoop?.hrv ? `<div><div class="h-stat-val">${d.whoop.hrv}</div><div class="h-stat-lbl">HRV</div></div>` : ''}
+          ${d.whoop?.percent ? `<div><div class="h-stat-val">${d.whoop.percent}%</div><div class="h-stat-lbl">Whoop</div></div>` : ''}
+        </div>
+        <div class="history-sessions">
+          ${d.sessions.map(s => {
+            let line = s.type === 'muscu' && s.exercises ? formatMuscuSummary(s.exercises) : (s.km ? s.km + 'km' : '');
+            return `<div class="history-session-line">${sportIcons[s.type]||''} ${line}</div>`;
+          }).join('')}
+        </div>
+        ${d.sessions.map(s => s.aiNote ? `<div class="history-ai-text">${s.aiNote}</div>` : '').join('')}
+      </div>
     </div>`;
   });
+
   container.innerHTML = html;
 }
 
-// Init
+// ============================================================
+// INIT
+// ============================================================
 checkApiKey();
+renderJournalState();
+updateGoalBar();
+
 </script>
 </body>
 </html>
