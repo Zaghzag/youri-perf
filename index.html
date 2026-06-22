@@ -821,6 +821,7 @@ async function logMorning() {
   };
 
   // If images provided, ask AI to extract score/sleep values for storage (best effort)
+  let extractionError = null;
   if (images.whoop && apiKey) {
     try {
       const contentParts = [];
@@ -834,16 +835,30 @@ async function logMorning() {
         body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 300, messages: [{ role: 'user', content: contentParts }] })
       });
       const data = await response.json();
-      const text = data.content?.[0]?.text || '';
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        const parsed = JSON.parse(jsonMatch[0]);
-        if (parsed.score_color) entry.whoop.score = parsed.score_color;
-        if (parsed.sleep_hours) entry.whoop.sleep = parsed.sleep_hours;
-        if (parsed.hrv) entry.whoop.hrv = parsed.hrv;
-        entry.whoop.percent = parsed.score_percent || null;
+
+      if (data.error) {
+        extractionError = data.error.message || 'Erreur API inconnue';
+      } else {
+        const text = data.content?.[0]?.text || '';
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          if (parsed.score_color) entry.whoop.score = parsed.score_color;
+          if (parsed.sleep_hours) entry.whoop.sleep = parsed.sleep_hours;
+          if (parsed.hrv) entry.whoop.hrv = parsed.hrv;
+          entry.whoop.percent = parsed.score_percent || null;
+        } else {
+          extractionError = 'Réponse IA illisible — réessaie ou saisis manuellement.';
+        }
       }
-    } catch(e) { console.error('Extraction Whoop échouée', e); }
+    } catch(e) {
+      extractionError = e.message || 'Erreur réseau';
+      console.error('Extraction Whoop échouée', e);
+    }
+  }
+
+  if (extractionError) {
+    alert('La lecture automatique de la photo a échoué : ' + extractionError + '\n\nTu peux saisir le score manuellement, ou réessayer.');
   }
 
   entry.scoreColor = entry.whoop.score || 'grey';
