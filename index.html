@@ -258,6 +258,21 @@ textarea.form-input { resize: none; height: 60px; }
 .today-session-chip { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 12px; color: var(--text); }
 .today-session-chip .tsc-icon { font-size: 14px; }
 .today-session-chip .tsc-label { flex: 1; font-weight: 600; }
+
+.morning-advice-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255,107,74,0.08), rgba(0,200,150,0.06));
+  border: 1px solid rgba(255,107,74,0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.morning-advice-card .ma-icon { font-size: 16px; flex-shrink: 0; }
 .add-session-btn { width: 100%; padding: 12px; background: rgba(255,107,74,0.06); border: 1px dashed var(--accent); border-radius: 10px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-bottom: 14px; }
 </style>
 </head>
@@ -755,6 +770,13 @@ function renderJournalState() {
     chip.className = 'today-session-chip';
     chip.innerHTML = `<span class="tsc-icon">⌚</span><span class="tsc-label">Whoop ${entry.whoop.score ? scoreIcons[entry.whoop.score] || '' : '📷'} ${entry.whoop.sleep ? '· ' + entry.whoop.sleep + 'h sommeil' : ''}${entry.whoop.hrv ? ' · HRV ' + entry.whoop.hrv : ''}</span><span style="cursor:pointer; color:var(--accent); font-size:11px; font-weight:700; text-transform:uppercase;" onclick="editMorningWhoop()">Modifier</span>`;
     listEl.appendChild(chip);
+
+    if (entry.whoop.advice) {
+      const adviceCard = document.createElement('div');
+      adviceCard.className = 'morning-advice-card';
+      adviceCard.innerHTML = `<span class="ma-icon">💡</span><span>${entry.whoop.advice}</span>`;
+      listEl.appendChild(adviceCard);
+    }
   } else {
     morningCard.style.display = 'block';
     addBtn.style.display = 'none';
@@ -820,19 +842,47 @@ async function logMorning() {
     hasSleepImg: !!images.whoopSleep
   };
 
-  // If images provided, ask AI to extract score/sleep values for storage (best effort)
+  // Ask AI to extract score/sleep values AND give immediate advice for today
   let extractionError = null;
-  if (images.whoop && apiKey) {
+  if (apiKey && (images.whoop || selectedScore)) {
     try {
       const contentParts = [];
-      contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.whoop } });
-      if (images.whoopSleep) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.whoopSleep } });
-      contentParts.push({ type: 'text', text: 'Regarde attentivement cette image d\'écran Whoop. Cherche : le pourcentage de récupération (Recovery, gros chiffre coloré), les heures de sommeil (Sleep, souvent affiché en format "7h 23m" ou "7.4 hrs" ou une durée), et le HRV en ms si visible. Réponds UNIQUEMENT avec un objet JSON, rien avant, rien après, pas de \'```\', format exact: {"score_color":"green","score_percent":89,"sleep_hours":7.4,"hrv":65}. Convertis "7h 23m" en 7.4 (décimal). Si une info n\'est vraiment pas visible sur l\'image, mets null pour ce champ uniquement.' });
+      if (images.whoop) {
+        contentParts.push({ type: 'image', source: { type: 'base64', media_type: imageMimeTypes.whoop || 'image/jpeg', data: images.whoop } });
+        if (images.whoopSleep) contentParts.push({ type: 'image', source: { type: 'base64', media_type: imageMimeTypes.whoopSleep || 'image/jpeg', data: images.whoopSleep } });
+      }
+
+      const seanceNom = {1:'Pec/Épaules/Triceps',2:'Course travaillée',3:'Dos/Biceps/Abdos',4:'Yoga/Mobilité+Bas du corps',5:'Full Haut Supersets',6:'Sortie longue',0:'Repos'}[todayNum];
+      const scoreMapTxt = { green: 'VERT (67-100%)', yellow: 'JAUNE (34-66%)', red: 'ROUGE (0-33%)' };
+
+      let promptText = images.whoop
+        ? 'Regarde attentivement cette image d\'écran Whoop. Cherche : le pourcentage de récupération (Recovery, gros chiffre coloré), les heures de sommeil, et le HRV en ms si visible.'
+        : `Score Whoop saisi manuellement : ${scoreMapTxt[selectedScore]}${sleep ? ', sommeil ' + sleep + 'h' : ''}${hrv ? ', HRV ' + hrv : ''}.`;
+
+      // recent context for smarter advice (recup-aware)
+      const last3 = getLastNDays(3);
+      let recentCtx = '';
+      if (last3.length) {
+        recentCtx = '\n\nDERNIERS JOURS (pour juger si un conseil récup est utile) :';
+        last3.forEach(d => {
+          const sessSummary = (d.sessions||[]).map(s => s.type + (s.modif ? ' [modifiée: '+s.modif+']' : '')).join(', ') || 'repos';
+          recentCtx += `\n- ${d.date} : Whoop ${d.whoop?.score || '?'} · Sommeil ${d.whoop?.sleep || '?'}h · ${sessSummary}`;
+        });
+      }
+
+      promptText += `\n\nContexte : Youri, 33 ans, DG entreprise peinture (stress élevé), séance prévue aujourd'hui : ${seanceNom}. Côte fêlée en cours de guérison (vérifie contexte récent si pertinent).${recentCtx}
+
+Réponds UNIQUEMENT avec un objet JSON, rien avant, rien après, pas de \`\`\`, format exact :
+{"score_color":"green","score_percent":89,"sleep_hours":7.4,"hrv":65,"advice":"2-3 lignes max, direct et tutoyé. Dis clairement s'il faut pousser fort ou lever le pied aujourd'hui et pourquoi. AJOUTE un conseil récup concret UNIQUEMENT si le contexte le justifie vraiment (sommeil bas répété, score rouge/jaune plusieurs jours, séances modifiées récentes, grosse séance prévue après mauvaise récup) — sinon ne force pas un conseil récup inutile."}
+
+Si une info n'est pas visible/fournie, mets null pour ce champ. Le champ "advice" est obligatoire.`;
+
+      contentParts.push({ type: 'text', text: promptText });
 
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 300, messages: [{ role: 'user', content: contentParts }] })
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 400, messages: [{ role: 'user', content: contentParts }] })
       });
       const data = await response.json();
 
@@ -847,6 +897,7 @@ async function logMorning() {
           if (parsed.sleep_hours) entry.whoop.sleep = parsed.sleep_hours;
           if (parsed.hrv) entry.whoop.hrv = parsed.hrv;
           entry.whoop.percent = parsed.score_percent || null;
+          entry.whoop.advice = parsed.advice || null;
         } else {
           extractionError = 'Réponse IA illisible — réessaie ou saisis manuellement.';
         }
@@ -1047,12 +1098,17 @@ function formatMuscuSummary(exercises) {
 // ============================================================
 // IMAGE UPLOAD
 // ============================================================
+let imageMimeTypes = {};
+
 function handleImgUpload(event, key) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = (e) => {
     images[key] = e.target.result.split(',')[1];
+    // Detect real mime type from the data URL itself (most reliable across devices)
+    const mimeMatch = e.target.result.match(/^data:(image\/[a-zA-Z]+);base64,/);
+    imageMimeTypes[key] = mimeMatch ? mimeMatch[1] : (file.type || 'image/jpeg');
     const previewMap = { whoop: 'whoop-preview', whoopSleep: 'whoop-sleep-preview', nike: 'nike-preview', whoopPost: 'whoop-post-preview' };
     const zoneMap = { whoop: 'whoop-zone', whoopSleep: 'whoop-sleep-zone', nike: 'nike-zone', whoopPost: 'whoop-post-zone' };
     const preview = document.getElementById(previewMap[key]);
@@ -1099,7 +1155,7 @@ async function analyzeSession() {
     sessionData.pace = pace || null;
     sessionData.fc = fc || null;
     sessionData.hasImg = !!images.nike;
-    if (images.nike) contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.nike } });
+    if (images.nike) contentParts.push({ type: 'image', source: { type: 'base64', media_type: imageMimeTypes.nike || 'image/jpeg', data: images.nike } });
     sessionDescription = images.nike ? 'Course — image Nike Run Club jointe' : `Course — ${km||'?'}km à ${pace||'?'}/km, FC ${fc||'?'}bpm`;
   } else if (selectedSession === 'velo') {
     const duree = document.getElementById('j-velo-duree').value;
@@ -1123,7 +1179,7 @@ async function analyzeSession() {
 
   // post-session whoop strain image (optional, any session type)
   if (images.whoopPost) {
-    contentParts.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: images.whoopPost } });
+    contentParts.push({ type: 'image', source: { type: 'base64', media_type: imageMimeTypes.whoopPost || 'image/jpeg', data: images.whoopPost } });
     sessionData.hasPostWhoopImg = true;
   }
 
