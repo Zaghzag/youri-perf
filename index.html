@@ -155,6 +155,7 @@ textarea.form-input { resize: none; height: 60px; }
 .exo-block-name { font-weight: 600; font-size: 13px; color: var(--white); margin-bottom: 2px; }
 .exo-block-last { font-size: 10px; color: var(--muted); margin-bottom: 10px; }
 .exo-block-last b { color: var(--accent); }
+.exo-target { display: inline-block; margin-left: 8px; font-weight: 700; color: var(--accent2); }
 .serie-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .serie-label { font-size: 10px; color: var(--muted); width: 38px; flex-shrink: 0; font-weight: 700; }
 .serie-input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; color: var(--accent); font-size: 13px; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; text-align: center; outline: none; }
@@ -316,11 +317,11 @@ textarea.form-input { resize: none; height: 60px; }
     <div class="card-label">Semaine type — clique un jour</div>
     <div class="week-row">
       <div class="day-pill active" onclick="selectDay('lun', this)"><div class="d-name">Lun</div><div class="d-icon">💪</div><div class="d-tag tag-muscu">Muscu</div></div>
-      <div class="day-pill" onclick="selectDay('mar', this)"><div class="d-name">Mar</div><div class="d-icon">🏃</div><div class="d-tag tag-run">Course</div></div>
+      <div class="day-pill" onclick="selectDay('mar', this)"><div class="d-name">Mar</div><div class="d-icon">🚴</div><div class="d-tag tag-run">Vélo</div></div>
       <div class="day-pill" onclick="selectDay('mer', this)"><div class="d-name">Mer</div><div class="d-icon">💪</div><div class="d-tag tag-muscu">Muscu</div></div>
       <div class="day-pill" onclick="selectDay('jeu', this)"><div class="d-name">Jeu</div><div class="d-icon">🧘</div><div class="d-tag tag-yoga">Yoga</div></div>
       <div class="day-pill" onclick="selectDay('ven', this)"><div class="d-name">Ven</div><div class="d-icon">💪</div><div class="d-tag tag-muscu">Muscu</div></div>
-      <div class="day-pill" onclick="selectDay('sam', this)"><div class="d-name">Sam</div><div class="d-icon">🏃</div><div class="d-tag tag-run">Long</div></div>
+      <div class="day-pill" onclick="selectDay('sam', this)"><div class="d-name">Sam</div><div class="d-icon">🚴</div><div class="d-tag tag-run">Vélo long</div></div>
       <div class="day-pill" onclick="selectDay('dim', this)"><div class="d-name">Dim</div><div class="d-icon">😴</div><div class="d-tag tag-rest">Repos</div></div>
     </div>
 
@@ -335,10 +336,11 @@ textarea.form-input { resize: none; height: 60px; }
     </div>
 
     <div id="detail-mar" class="day-detail">
-      <div class="detail-title">🏃 Course travaillée</div>
-      <div class="ex-item"><div><div class="ex-name">Échauffement</div><div class="ex-tip">10 min allure très facile</div></div><div><div class="ex-sets">10 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Blocs rapides</div><div class="ex-tip">3 min récup facile entre les blocs</div></div><div><div class="ex-sets">2×3km</div><div class="ex-reps">4'45/km</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Retour au calme</div><div class="ex-tip">5-10 min très lent + étirements</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="detail-title">🚴 Vélo — Récup côte</div>
+      <div class="ex-item"><div><div class="ex-name">Échauffement</div><div class="ex-tip">Cadence libre, tranquille</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Corps de séance</div><div class="ex-tip">Allure modérée · Cadence 80-90 rpm · FC zone 2, tu dois pouvoir parler · Zéro à-coup, zéro sprint</div></div><div><div class="ex-sets">25 min</div><div class="ex-reps">Zone 2</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Retour au calme</div><div class="ex-tip">Cadence libre, étirements légers</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">⚠️ Pendant la côte</div><div class="ex-tip">Reste assis, évite de te pencher fort sur le guidon qui comprime le buste. Stop immédiat si douleur thoracique.</div></div><div><div class="ex-sets">Vigilance</div></div></div>
     </div>
 
     <div id="detail-mer" class="day-detail">
@@ -370,10 +372,11 @@ textarea.form-input { resize: none; height: 60px; }
     </div>
 
     <div id="detail-sam" class="day-detail">
-      <div class="detail-title">🏃 Sortie longue progressive</div>
-      <div class="ex-item"><div><div class="ex-name">Sortie longue</div><div class="ex-tip">Allure confortable · Tu dois pouvoir parler</div></div><div><div class="ex-sets">9→10km</div><div class="ex-reps">5'00-5'10/km</div></div></div>
+      <div class="detail-title">🚴 Vélo long — Récup côte</div>
+      <div class="ex-item"><div><div class="ex-name">Échauffement</div><div class="ex-tip">Cadence libre</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Corps de séance</div><div class="ex-tip">Allure confortable · Terrain plat si possible — évite de te pencher fort sur le guidon</div></div><div><div class="ex-sets">45-60 min</div><div class="ex-reps">Zone 2</div></div></div>
       <div class="ex-item"><div><div class="ex-name">Hydratation</div><div class="ex-tip">Eau toutes les 20 min</div></div><div><div class="ex-sets">≥ 20 min</div></div></div>
-      <div class="ex-item"><div><div class="ex-name">Après la sortie</div><div class="ex-tip">10 min étirements</div></div><div><div class="ex-sets">10 min</div></div></div>
+      <div class="ex-item"><div><div class="ex-name">Après la sortie</div><div class="ex-tip">10 min étirements légers</div></div><div><div class="ex-sets">10 min</div></div></div>
     </div>
 
     <div id="detail-dim" class="day-detail">
@@ -663,24 +666,24 @@ document.getElementById('today-date').textContent = days[todayNum] + ' ' + now.g
 // ============================================================
 const seanceParJour = {
   1: { label: 'Pec · Épaules · Triceps', exos: [
-    { id: 'bench', name: 'Développé couché barre', unit: 'kg' },
-    { id: 'dips', name: 'Dips', unit: 'rép' },
-    { id: 'militaire', name: 'Développé militaire', unit: 'kg' },
-    { id: 'laterales', name: 'Élévations latérales', unit: 'kg' },
-    { id: 'ecarte', name: 'Écarté haltères', unit: 'kg' },
-    { id: 'oiseau', name: 'Élévations arrière (oiseau)', unit: 'kg' },
+    { id: 'bench', name: 'Développé couché barre', unit: 'kg', target: '62.5' },
+    { id: 'dips', name: 'Dips', unit: 'rép', target: null },
+    { id: 'militaire', name: 'Développé militaire', unit: 'kg', target: '12.5-15' },
+    { id: 'laterales', name: 'Élévations latérales', unit: 'kg', target: '8' },
+    { id: 'ecarte', name: 'Écarté haltères', unit: 'kg', target: '10' },
+    { id: 'oiseau', name: 'Élévations arrière (oiseau)', unit: 'kg', target: null },
   ]},
   3: { label: 'Dos · Biceps · Abdos', exos: [
-    { id: 'tractions-large', name: 'Tractions prise large', unit: 'rép' },
-    { id: 'tractions-serree', name: 'Tractions prise serrée', unit: 'rép' },
-    { id: 'rowing-barre', name: 'Rowing barre', unit: 'kg' },
-    { id: 'rowing-haltere', name: 'Rowing haltère uni.', unit: 'kg' },
-    { id: 'curl-barre', name: 'Curl barre', unit: 'kg' },
-    { id: 'curl-marteau', name: 'Curl marteau', unit: 'kg' },
+    { id: 'tractions-large', name: 'Tractions prise large', unit: 'rép', target: '6' },
+    { id: 'tractions-serree', name: 'Tractions prise serrée', unit: 'rép', target: null },
+    { id: 'rowing-barre', name: 'Rowing barre', unit: 'kg', target: null },
+    { id: 'rowing-haltere', name: 'Rowing haltère uni.', unit: 'kg', target: null },
+    { id: 'curl-barre', name: 'Curl barre', unit: 'kg', target: null },
+    { id: 'curl-marteau', name: 'Curl marteau', unit: 'kg', target: null },
   ]},
   5: { label: 'Full Haut · Supersets', exos: [
-    { id: 'dev-halteres', name: 'Développé haltères', unit: 'kg' },
-    { id: 'tractions-ven', name: 'Tractions', unit: 'rép' },
+    { id: 'dev-halteres', name: 'Développé haltères', unit: 'kg', target: null },
+    { id: 'tractions-ven', name: 'Tractions', unit: 'rép', target: null },
     { id: 'militaire-ven', name: 'Développé militaire', unit: 'kg' },
     { id: 'rowing-ven', name: 'Rowing haltère', unit: 'kg' },
     { id: 'laterales-ven', name: 'Élévations latérales', unit: 'kg' },
@@ -1063,12 +1066,13 @@ function selectMuscuType(dayKey, el) {
     block.dataset.unit = exo.unit;
 
     const lastVal = getLastChargeFor(exo.id);
+    const targetTxt = exo.target ? `<span class="exo-target">🎯 Vise ${exo.target}${exo.unit === 'kg' ? 'kg' : ' rép'}</span>` : '';
 
     block.innerHTML = `
       <div class="exo-block-name">${exo.name}</div>
-      <div class="exo-block-last">${lastVal ? 'Dernière fois : <b>' + lastVal + '</b>' : 'Pas encore de données'}</div>
+      <div class="exo-block-last">${lastVal ? 'Dernière fois : <b>' + lastVal + '</b>' : 'Pas encore de données'} ${targetTxt}</div>
       <div class="serie-row" style="margin-top:8px; margin-bottom:0;">
-        <input type="number" class="serie-input exo-weight" placeholder="${exo.unit === 'kg' ? 'kg' : ''}">
+        <input type="number" class="serie-input exo-weight" placeholder="${exo.target ? exo.target : (exo.unit === 'kg' ? 'kg' : '')}">
         <div class="serie-x">×</div>
         <input type="number" class="serie-input exo-reps" placeholder="rép">
       </div>
